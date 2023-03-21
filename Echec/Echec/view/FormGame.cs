@@ -45,7 +45,7 @@ namespace Echec.view
                 MouseEventArgs meDestination = (MouseEventArgs)e;
                 Point coordinates2 = meDestination.Location;
                 end = coordinates2;
-                //label1.Text = end.ToString();
+                label1.Text = end.ToString();
                 clickCounter = 0;
             }
 
