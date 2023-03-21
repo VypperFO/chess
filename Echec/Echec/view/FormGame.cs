@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ namespace Echec.view
 {
     public partial class FormGame : Form
     {
+        int clickCounter = 0;
         public FormGame()
         {
             InitializeComponent();
@@ -21,9 +23,33 @@ namespace Echec.view
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            MouseEventArgs me = (MouseEventArgs)e;
-            Point coordinates = me.Location;
-            labWhichTurn.Text = me.Clicks.ToString();
+            Point start;
+            Point end;
+            clickCounter++;
+
+            if (clickCounter == 1)
+            {
+                //label1.Text = "";
+            }
+
+            if (clickCounter == 1)
+            {
+                MouseEventArgs meStart = (MouseEventArgs)e;
+                Point coordinates = meStart.Location;
+                start = coordinates;
+                labWhichTurn.Text = start.ToString();
+            }
+
+            if (clickCounter == 2)
+            {
+                MouseEventArgs meDestination = (MouseEventArgs)e;
+                Point coordinates2 = meDestination.Location;
+                end = coordinates2;
+                //label1.Text = end.ToString();
+                clickCounter = 0;
+            }
+
+
         }
 
 

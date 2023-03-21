@@ -8,19 +8,19 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\2173242\\.nuget\\packages\\": {}
+    "C:\\Users\\2130875\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\2173242\\Desktop\\chess\\Echec\\Echec\\Echec.csproj",
+      "projectUniqueName": "C:\\Users\\2130875\\Desktop\\chessFinal\\Echec\\Echec\\Echec.csproj",
       "projectName": "Echec",
-      "projectPath": "C:\\Users\\2173242\\Desktop\\chess\\Echec\\Echec\\Echec.csproj",
-      "packagesPath": "C:\\Users\\2173242\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\2173242\\Desktop\\chess\\Echec\\Echec\\obj\\",
+      "projectPath": "C:\\Users\\2130875\\Desktop\\chessFinal\\Echec\\Echec\\Echec.csproj",
+      "packagesPath": "C:\\Users\\2130875\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\2130875\\Desktop\\chessFinal\\Echec\\Echec\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\2173242\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\2130875\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
