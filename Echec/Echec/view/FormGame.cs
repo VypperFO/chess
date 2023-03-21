@@ -29,7 +29,7 @@ namespace Echec.view
 
             if (clickCounter == 1)
             {
-                //label1.Text = "";
+                label1.Text = "";
             }
 
             if (clickCounter == 1)
@@ -45,7 +45,7 @@ namespace Echec.view
                 MouseEventArgs meDestination = (MouseEventArgs)e;
                 Point coordinates2 = meDestination.Location;
                 end = coordinates2;
-                //label1.Text = end.ToString();
+                label1.Text = end.ToString();
                 clickCounter = 0;
             }
 
