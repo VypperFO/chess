@@ -9,9 +9,9 @@ namespace Echec.model
     public class Joueur
     {
         private string name;
-        private int nbVictory;
-        private int nbDefeat;
-        private int nbNull;
+        private string nbVictory;
+        private string nbDefeat;
+        private string nbNull;
 
         public string Name 
         { 
@@ -19,19 +19,19 @@ namespace Echec.model
             set { name = value; }
         }
 
-        public int NbVictory
+        public string NbVictory
         {
             get { return nbVictory; }
             set { nbVictory = value; }
         }
 
-        public int NbDefeat
+        public string NbDefeat
         {
             get { return nbDefeat; }
             set { nbDefeat = value; }
         }
 
-        public int NbNull
+        public string NbNull
         {
             get { return nbNull; }
             set { nbNull = value; }

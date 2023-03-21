@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGame));
             this.chessboard = new System.Windows.Forms.PictureBox();
             this.labWhichTurn = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,12 +36,12 @@
             // 
             // chessboard
             // 
-            this.chessboard.Image = ((System.Drawing.Image)(resources.GetObject("chessboard.Image")));
+            this.chessboard.Image = global::Echec.Properties.Resources.chessboard;
             this.chessboard.Location = new System.Drawing.Point(17, 20);
             this.chessboard.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chessboard.Name = "chessboard";
             this.chessboard.Size = new System.Drawing.Size(800, 800);
-            this.chessboard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.chessboard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Normal;
             this.chessboard.TabIndex = 0;
             this.chessboard.TabStop = false;
             this.chessboard.Click += new System.EventHandler(this.pictureBox1_Click);

@@ -10,9 +10,14 @@ namespace Echec.model
     {
         private List<Joueur> listPlayers;
         private Plateau board;
-        private int roundsInRow;
-        private bool whichTurn;
         private List<String> listBoardConfig;
+
+        public Partie() { }
+
+        public string playMove(Coordonnée coords)
+        {
+            return "knbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNK w KQkq - 0 1";
+        }
 
         public Plateau Board
         {
@@ -20,16 +25,6 @@ namespace Echec.model
             set { board = value; }
         }
 
-        public int RoundsInRow
-        {
-            get { return roundsInRow; }
-            set => roundsInRow = value;
-        }
-
-        public bool WhichTurn
-        {
-            get { return whichTurn; }
-            set { whichTurn = value; }
-        }
+        
     }
 }

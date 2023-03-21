@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Echec.model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,15 +13,27 @@ namespace Echec.view
 {
     public partial class FormMenu : Form
     {
-        public FormMenu()
+        private Echec chess;
+        public FormMenu(Echec chess)
         {
+            this.chess = chess;
             InitializeComponent();
+            chess.readStats();
+            foreach(Joueur test in chess.listAllPlayer)
+            {
+                listBox1.Items.Add(test);
+            }
+            
         }
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
-            var myForm = new FormGame();
-            myForm.Show();
+            chess.newGame();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

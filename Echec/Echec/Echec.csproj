@@ -12,7 +12,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="assets\" />
+    <None Remove="model\NewFile1.txt" />
+    <None Remove="Properties\chess_board.jpg" />
   </ItemGroup>
 
   <ItemGroup>
