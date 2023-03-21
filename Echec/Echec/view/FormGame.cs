@@ -48,8 +48,6 @@ namespace Echec.view
                 label1.Text = end.ToString();
                 clickCounter = 0;
             }
-
-
         }
 
 

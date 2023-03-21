@@ -1,6 +1,6 @@
 namespace Echec
 {
-    internal static class Echec
+     public class Echec
     {
         /// <summary>
         ///  The main entry point for the application.
@@ -8,10 +8,13 @@ namespace Echec
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            Echec Jeu = new Echec();
+        }
+
+        public Echec() {
             ApplicationConfiguration.Initialize();
-            Application.Run(new view.FormMenu());
+            view.FormMenu menu = new view.FormMenu();
+            Application.Run(menu);
         }
     }
 }
