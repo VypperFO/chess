@@ -29,7 +29,7 @@ namespace Echec.view
 
             if (clickCounter == 1)
             {
-                //label1.Text = "";
+                label1.Text = "";
             }
 
             if (clickCounter == 1)
