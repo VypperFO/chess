@@ -8,6 +8,7 @@ namespace Echec.model.pieces
 {
     public class Tour: PieceSpecial
     {
+
         public Tour() { }
         public Tour(string name, bool isMoved) 
         {

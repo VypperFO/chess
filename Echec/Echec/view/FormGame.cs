@@ -19,10 +19,17 @@ namespace Echec.view
         private Point start;
         private Point end;
         private Echec chess;
+        private int id;
 
-        public FormGame(Echec chess)
+        public int Id
+        {
+            get { return id; }
+        }
+
+        public FormGame(Echec chess,int id)
         {
             this.chess = chess;
+            this.id = id;
             InitializeComponent();
         }
 
@@ -70,6 +77,7 @@ namespace Echec.view
 
         public void parseFen(string fen)
         {
+            clear();
             string[] parts = fen.Split(' ');
 
             string[] rows = parts[0].Split('/');
@@ -127,26 +135,26 @@ namespace Echec.view
 
         private void drawPiece(int x, int y, Bitmap imageName)
         {
-            // Create a new Bitmap object from the PictureBox control's Image property
             Bitmap bmp = new Bitmap(chessboard.Image);
 
-            // Create a new Graphics object from the bitmap
             Graphics g = Graphics.FromImage(bmp);
 
-            // Load the image for the chess piece
             Bitmap piece = new Bitmap(imageName);
 
-            // Draw the image on the appropriate square
             g.DrawImage(piece, new Rectangle(x, y, (chessboard.Height / 8), (chessboard.Width / 8)));
 
-            // Update the PictureBox control's Image property with the new bitmap
             chessboard.Image = bmp;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void clear()
         {
-            parseFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"); 
+            chessboard.Image.Dispose();
+            chessboard.Image = global::Echec.Properties.Resources.chessboard;
+        }
 
+        private void Form1_load(object sender, EventArgs e)
+        {
+            parseFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
         }
     }
 }

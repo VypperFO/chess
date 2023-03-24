@@ -10,13 +10,33 @@ namespace Echec.model
     {
         private List<Joueur> listPlayers;
         private Plateau board;
-        private List<String> listBoardConfig;
+        private List<string> listBoardConfig;
+        private int id;
 
         public Partie() { }
+        public int Id
+        {
+            get { return id; }
+        }
+
+        public Partie(int id)
+        {
+            this.board = new Plateau();
+            this.listBoardConfig = new List<string>();
+            this.listBoardConfig.Add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+            this.id = id;
+        }
 
         public string playMove(Coordonnée coords)
         {
-            return "knbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNK w KQkq - 0 1";
+            string boardMoved = board.playMove(coords, listBoardConfig.ElementAt(listBoardConfig.Count -1));
+
+            if (boardMoved != null)
+            {
+                listBoardConfig.Add(boardMoved);
+                return boardMoved;
+            }
+            return null;
         }
 
         public Plateau Board

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Echec.model.pieces
 {
-    public abstract class Piece
+    public class Piece
     {
         protected string name = "";
+        public char Type { get; set; } // 'K' for king, 'Q' for queen, 'R' for rook, 'B' for bishop, 'N' for knight, 'P' for pawn
+        public bool IsWhite { get; set; }
 
         public Piece() { }
 

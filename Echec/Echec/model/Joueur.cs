@@ -9,10 +9,20 @@ namespace Echec.model
     public class Joueur
     {
         private string name;
+        private string nbNull;
         private string nbVictory;
         private string nbDefeat;
-        private string nbNull;
 
+        public Joueur(){}
+        public Joueur(string name, string nbVictory, string nbDefeat, string nbNull)
+        {
+            this.name = name;
+            this.nbVictory = nbVictory;
+            this.nbDefeat = nbDefeat;
+            this.nbNull = nbNull;
+        }
+
+     
         public string Name 
         { 
             get { return name; }

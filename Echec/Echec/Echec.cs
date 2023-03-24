@@ -1,15 +1,19 @@
 using Echec.view;
 using Echec.model;
 using System.Diagnostics.Metrics;
+using System.IO;
+using static System.Windows.Forms.LinkLabel;
 
 namespace Echec
 {
-     public class Echec
+    public class Echec
     {
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
-        public List<model.Joueur> listAllPlayer = new List<model.Joueur>();
+        public List<Joueur> listAllPlayer = new List<Joueur>();
+        public List<Partie> listGame = new List<Partie>();
+
         static void Main()
         {
             Echec chess = new Echec();
@@ -24,41 +28,116 @@ namespace Echec
         public void playMove(int xStart, int yStart, int xEnd, int yEnd, FormGame form)
         {
             Coordonnée coords = new Coordonnée(xStart, yStart, xEnd, yEnd);
-            Partie game = new model.Partie();
-            string move = game.playMove(coords);
+            Partie game = listGame.ElementAt(form.Id);
+            string gameMove = game.playMove(coords);
             
-            if (move != null)
+            if (gameMove != null)
             {
-                form.parseFen(move);
+                form.parseFen(gameMove);
             }
             return;
         }
 
-        public void newGame()
+        private Partie Partie()
         {
-            var myForm = new FormGame(this);
+            throw new NotImplementedException();
+        }
+
+        public void newGame(FormMenu menu)
+        {
+            int id = 0;
+
+            FormGame myForm = new FormGame(this, id++);
+
+            Partie game = new Partie(id++);
+            listGame.Add(game);
+
             myForm.Show();
         }
-        public void readStats()
+        public List<string> readStats()
         {
-            
-            foreach (string line in System.IO.File.ReadLines("statistique.txt"))
-            {
-                model.Joueur player = new model.Joueur();
-                string [] parts =  line.Split("/");
+            this.listAllPlayer.Clear();
+            string path = "statistique.txt";
+            string[] readText = File.ReadAllLines(path);
+            List<string> strings = new List<string>();
+            List<string> playerNames = new List<string>();
 
-                for (int i = 0; i < parts.Length; i++)
+            int count = 0;
+            foreach (string s in readText)
+            {
+                strings.Add(s);
+                count++;
+
+                if(count == 5)
                 {
-                    string[] playerStats = parts[0].Split(' ');
-                    player.Name = playerStats[0];
-                    player.NbNull = playerStats[1];
-                    player.NbVictory = playerStats[2];
-                    player.NbVictory = playerStats[3];
+                        Joueur player = new Joueur(strings.ElementAt(0), strings.ElementAt(1), strings.ElementAt(2), strings.ElementAt(3));
+                        listAllPlayer.Add(player);
+                    count = 0;
+                    strings.Clear();
                 }
-                listAllPlayer.Add(player);
+            }
+
+            for(int i = 0; i < listAllPlayer.Count(); i++)
+            {
+                playerNames.Add(listAllPlayer.ElementAt(i).Name);
+            }
+            return playerNames;
+        }
+
+        public void newPlayer(string name)
+        {
+            if (!isUserExisting(name)) { 
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer);
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "statistique.txt"), true))
+                {
+                    outputFile.WriteLine(name);
+                    outputFile.WriteLine("0");
+                    outputFile.WriteLine("0");
+                    outputFile.WriteLine("0");
+                    outputFile.WriteLine("/");
+                }
+            } else
+            {
+
             }
         }
 
+        public List<string> getStats(int index)
+        {
+            List<string> strings = new List<string>();
+            strings.Add(listAllPlayer.ElementAt(index).NbNull);
+            strings.Add(listAllPlayer.ElementAt(index).NbVictory);
+            strings.Add(listAllPlayer.ElementAt(index).NbDefeat);
 
+            return strings;
+        }
+
+        public bool isUserExisting(string name)
+        {
+            string path = "statistique.txt";
+            string[] readText = File.ReadAllLines(path);
+
+            foreach (string s in readText)
+            {
+                if(s.Equals(name))
+                {
+                    return true;
+                }
+            }
+                return false;
+        }
+
+        public Joueur getPlayer(string name)
+        {
+
+            foreach (Joueur player in listAllPlayer)
+            {
+                if (player.Name == name)
+                {
+                    return player;
+                }
+            }
+            return null;
+        }
     }
 }

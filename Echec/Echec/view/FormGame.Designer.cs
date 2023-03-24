@@ -41,7 +41,6 @@
             this.chessboard.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chessboard.Name = "chessboard";
             this.chessboard.Size = new System.Drawing.Size(800, 800);
-            this.chessboard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Normal;
             this.chessboard.TabIndex = 0;
             this.chessboard.TabStop = false;
             this.chessboard.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -78,7 +77,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormGame";
             this.Text = "Game";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.Form1_load);
             ((System.ComponentModel.ISupportInitialize)(this.chessboard)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
