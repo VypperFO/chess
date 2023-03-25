@@ -1,33 +1,134 @@
 ﻿using Echec.model.pieces;
+using Echec.Properties;
 using System.Text;
 
 namespace Echec.model
 {
     public class Plateau
     {
-        private Piece[] pieces;
+        private Piece[]? pieces;
+        private string whichTurn;
 
         public Plateau()
         {
+            whichTurn = "w";
             initPieces();
         }
-        public Plateau playMove(Coordonnée coords)
+        public Plateau? playMove(Coordonnée coords)
         {
-            int caca = coords.YStart / 100;
-            int caca2 = coords.XStart / 100;
-            int indexStart = getIndexChange(caca2, caca);
+            int indexStart = getIndexChange(coords.XStart / 100, coords.YStart / 100);
             int indexEnd = getIndexChange(coords.XDestination / 100, coords.YDestination / 100);
 
-            pieces[indexEnd] = pieces[indexStart];
-            pieces[indexStart] = null;
+            Piece piece = pieces[indexStart];
+
+            if(piece == null || !piece.playMove(indexStart, indexEnd))
+            {
+                return null;
+            }
+
+            //changeTurn();
+            pieces.SetValue(pieces[indexStart], indexEnd);
+            pieces.SetValue(null, indexStart);
             return this;
+        }
+
+        private bool checkTurn(Piece piece)
+        {
+            switch (whichTurn) {
+                case "w":
+                    return char.IsUpper(piece.Type);
+                case "b":
+                    return char.IsLower(piece.Type);
+                default: 
+                    return false;
+            }
+        }
+
+        private void changeTurn()
+        {
+            switch(whichTurn)
+            {
+                case "w":
+                    whichTurn= "b";
+                    break;
+                case "b":
+                    whichTurn= "w";
+                    break;
+                default:
+                    whichTurn= "w";
+                    break;
+            }
         }
 
         private int getIndexChange(int x, int y)
         {
-            return ((y)) * 8 + x;
+            return y * 8 + x;
         }
 
+
+        private void initPieces()
+        {
+            string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+            pieces = new Piece[64];
+            string[] fields = fen.Split(' ');
+            string[] ranks = fields[0].Split('/');
+
+            int index = 0;
+            foreach (string rank in ranks)
+            {
+                foreach (char c in rank)
+                {
+                    if (Char.IsDigit(c))
+                    {
+                        index += (int)Char.GetNumericValue(c);
+                    }
+                    else
+                    {
+                        switch (c)
+                        {
+                            case 'P':
+                                pieces[index] = new Pion(c);
+                                break;
+                            case 'N':
+                                pieces[index] = new Cavalier(c);
+                                break;
+                            case 'B':
+                                pieces[index] = new Fou(c);
+                                break;
+                            case 'R':
+                                pieces[index] = new Tour(c);
+                                break;
+                            case 'Q':
+                                pieces[index] = new Reine(c);
+                                break;
+                            case 'K':
+                                pieces[index] = new Roi(c);
+                                break;
+                            case 'p':
+                                pieces[index] = new Pion(c);
+                                break;
+                            case 'n':
+                                pieces[index] = new Cavalier(c);
+                                break;
+                            case 'b':
+                                pieces[index] = new Fou(c);
+                                break;
+                            case 'r':
+                                pieces[index] = new Tour(c);
+                                break;
+                            case 'q':
+                                pieces[index] = new Reine(c);
+                                break;
+                            case 'k':
+                                pieces[index] = new Roi(c);
+                                break;
+                        }
+                        index++;
+                    }
+                }
+            }
+        }
         public override string ToString()
         {
             if (pieces.Length != 64)
@@ -72,35 +173,12 @@ namespace Echec.model
                 }
             }
 
-            sb.Append(" w KQkq - 0 1");
+            sb.Append(' ');
+            sb.Append(whichTurn);
+            sb.Append(' ');
+            sb.Append("KQkq - 0 1");
 
             return sb.ToString();
-        }
-
-        private void initPieces()
-        {
-            string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-
-            pieces = new Piece[64];
-            string[] fields = fen.Split(' ');
-            string[] ranks = fields[0].Split('/');
-
-            int index = 0;
-            foreach (string rank in ranks)
-            {
-                foreach (char c in rank)
-                {
-                    if (Char.IsDigit(c))
-                    {
-                        index += (int)Char.GetNumericValue(c);
-                    }
-                    else
-                    {
-                        pieces[index] = new Piece(c);
-                        index++;
-                    }
-                }
-            }
         }
     }
 }

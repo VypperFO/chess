@@ -21,8 +21,8 @@
             {
                 listBoardConfig.Add(boardMoved);
                 return boardMoved.ToString();
-            }
-            return null;
+            } 
+            return listBoardConfig.ElementAt(listBoardConfig.Count -1).ToString();
         }
 
         public Plateau Board

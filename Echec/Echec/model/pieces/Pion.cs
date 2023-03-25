@@ -2,20 +2,28 @@
 {
     public class Pion : PieceSpecial
     {
-        private bool isEnPassant;
-
         public Pion() { }
-        public Pion(char type, bool isEnPassant, bool isMoved = false)
+
+        public Pion(char type, bool isMoved = false)
         {
             Type = type;
             IsMoved = isMoved;
-            IsEnPassant = isEnPassant;
         }
 
-        public bool IsEnPassant
+        public override bool playMove(int indexStart, int indexEnd)
         {
-            get { return isEnPassant; }
-            set { isEnPassant = value; }
+            indexStart++;
+            indexEnd++;
+
+            if (indexEnd == indexStart + 1 || (indexStart == 2 && indexEnd == 4))
+            {
+                return true;
+            }
+            else if ((indexEnd == indexStart + 2 && indexStart == 2) || (indexEnd == indexStart + 1 && (indexStart % 2 != indexEnd % 2)))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

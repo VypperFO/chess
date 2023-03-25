@@ -29,11 +29,8 @@ namespace Echec
             Partie game = listGame.ElementAt(form.Id);
             string gameMove = game.playMove(coords);
 
-            if (gameMove != null)
-            {
-                form.parseFen(gameMove);
-            }
-            return;
+            form.parseFen(gameMove);
+
         }
 
         public void newGame(FormMenu menu)

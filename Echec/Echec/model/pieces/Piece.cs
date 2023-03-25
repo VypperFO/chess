@@ -10,5 +10,9 @@
         {
             Type = type;
         }
+
+        public virtual bool playMove(int indexStart, int indexEnd) {
+            return false;
+        }
     }
 }
