@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Echec.model.pieces
+﻿namespace Echec.model.pieces
 {
-    public class Tour: PieceSpecial
+    public class Tour : PieceSpecial
     {
 
         public Tour() { }
-        public Tour(string name, bool isMoved) 
+        public Tour(char type, bool isMoved)
         {
-            Name = name;
+            Type = type;
             IsMoved = isMoved;
         }
     }

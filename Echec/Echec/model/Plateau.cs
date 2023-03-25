@@ -5,86 +5,102 @@ namespace Echec.model
 {
     public class Plateau
     {
-        public string playMove(Coordonnée coords, string fen)
+        private Piece[] pieces;
+
+        public Plateau()
         {
-
-            return "";
-        }   
-        
-        public Piece[] convertFenPiece(string fen)
+            initPieces();
+        }
+        public Plateau playMove(Coordonnée coords)
         {
-            // Create a 2D array to represent the current board state
-            Piece[] pieces = new Piece[32];
-            List<string> fenParts = fen.Split(' ').ToList();
+            int caca = coords.YStart / 100;
+            int caca2 = coords.XStart / 100;
+            int indexStart = getIndexChange(caca2, caca);
+            int indexEnd = getIndexChange(coords.XDestination / 100, coords.YDestination / 100);
 
-            // Populate the board array based on the FEN string
-            string[] ranks = fenParts[0].Split('/');
-            for (int rank = 0; rank < 8; rank++)
-            {
-                for (int file = 0; file < 8; file++)
-                {
-                    char c = ranks[7 - rank][file];
-                    if (char.IsDigit(c))
-                    {
-                        file += int.Parse(c.ToString()) - 1;
-                        continue;
-                    }
-
-                    Piece piece = new Piece();
-                    piece.IsWhite = char.IsUpper(c);
-                    piece.Type = char.ToUpper(c);
-                    pieces[rank * 32 + file] = piece;
-                }
-            }
-
-            return pieces;
+            pieces[indexEnd] = pieces[indexStart];
+            pieces[indexStart] = null;
+            return this;
         }
 
-        // NE MARCHE PAS
-        public string GetFenString(int xStart, int yStart, int xEnd, int yEnd, string currentFen)
+        private int getIndexChange(int x, int y)
         {
+            return ((y)) * 8 + x;
+        }
 
-
-            // Make the specified move on the board
-            Piece pieceToMove = board[xStart, yStart];
-            board[xStart, yStart] = null;
-            board[xEnd, yEnd] = pieceToMove;
-
-            // Build the FEN string from the updated board state
-            StringBuilder fenBuilder = new StringBuilder();
-            for (int rank = 7; rank >= 0; rank--)
+        public override string ToString()
+        {
+            if (pieces.Length != 64)
             {
-                int emptySquares = 0;
-                for (int file = 0; file < 8; file++)
+                throw new ArgumentException("Invalid number of pieces");
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < 64; i += 8)
+            {
+                int emptyCount = 0;
+
+                for (int j = i; j < i + 8; j++)
                 {
-                    Piece piece = board[file, rank];
+                    Piece piece = pieces[j];
+
                     if (piece == null)
                     {
-                        emptySquares++;
+                        emptyCount++;
                     }
                     else
                     {
-                        if (emptySquares > 0)
+                        if (emptyCount > 0)
                         {
-                            fenBuilder.Append(emptySquares);
-                            emptySquares = 0;
+                            sb.Append(emptyCount);
+                            emptyCount = 0;
                         }
-                        fenBuilder.Append(piece.IsWhite ? char.ToLower(piece.Type) : char.ToUpper(piece.Type));
+
+                        sb.Append(piece.Type);
                     }
                 }
-                if (emptySquares > 0)
+
+                if (emptyCount > 0)
                 {
-                    fenBuilder.Append(emptySquares);
+                    sb.Append(emptyCount);
                 }
-                if (rank > 0)
+
+                if (i < 56)
                 {
-                    fenBuilder.Append("/");
+                    sb.Append('/');
                 }
             }
 
-            // Add the remaining FEN parts to the string and return it
-            fenParts[0] = fenBuilder.ToString();
-            return string.Join(" ", fenParts);
+            sb.Append(" w KQkq - 0 1");
+
+            return sb.ToString();
+        }
+
+        private void initPieces()
+        {
+            string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+            pieces = new Piece[64];
+            string[] fields = fen.Split(' ');
+            string[] ranks = fields[0].Split('/');
+
+            int index = 0;
+            foreach (string rank in ranks)
+            {
+                foreach (char c in rank)
+                {
+                    if (Char.IsDigit(c))
+                    {
+                        index += (int)Char.GetNumericValue(c);
+                    }
+                    else
+                    {
+                        pieces[index] = new Piece(c);
+                        index++;
+                    }
+                }
+            }
         }
     }
 }

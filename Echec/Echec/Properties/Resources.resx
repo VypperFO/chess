@@ -130,7 +130,7 @@
   <data name="wking" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\wking.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="chess_board" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="chessboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\chess_board.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="wrook" type="System.Resources.ResXFileRef, System.Windows.Forms">

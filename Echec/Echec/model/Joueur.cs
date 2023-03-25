@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Echec.model
+﻿namespace Echec.model
 {
     public class Joueur
     {
@@ -13,7 +7,7 @@ namespace Echec.model
         private string nbVictory;
         private string nbDefeat;
 
-        public Joueur(){}
+        public Joueur() { }
         public Joueur(string name, string nbVictory, string nbDefeat, string nbNull)
         {
             this.name = name;
@@ -22,9 +16,9 @@ namespace Echec.model
             this.nbNull = nbNull;
         }
 
-     
-        public string Name 
-        { 
+
+        public string Name
+        {
             get { return name; }
             set { name = value; }
         }

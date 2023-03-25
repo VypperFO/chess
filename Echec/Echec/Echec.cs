@@ -1,8 +1,5 @@
-using Echec.view;
 using Echec.model;
-using System.Diagnostics.Metrics;
-using System.IO;
-using static System.Windows.Forms.LinkLabel;
+using Echec.view;
 
 namespace Echec
 {
@@ -19,7 +16,8 @@ namespace Echec
             Echec chess = new Echec();
         }
 
-        public Echec() {
+        public Echec()
+        {
             ApplicationConfiguration.Initialize();
             view.FormMenu menu = new view.FormMenu(this);
             Application.Run(menu);
@@ -30,7 +28,7 @@ namespace Echec
             Coordonnée coords = new Coordonnée(xStart, yStart, xEnd, yEnd);
             Partie game = listGame.ElementAt(form.Id);
             string gameMove = game.playMove(coords);
-            
+
             if (gameMove != null)
             {
                 form.parseFen(gameMove);
@@ -38,25 +36,22 @@ namespace Echec
             return;
         }
 
-        private Partie Partie()
-        {
-            throw new NotImplementedException();
-        }
-
         public void newGame(FormMenu menu)
         {
-            int id = 0;
-
-            FormGame myForm = new FormGame(this, id++);
-
-            Partie game = new Partie(id++);
+            Partie game = new Partie();
             listGame.Add(game);
+
+            int id = listGame.Count - 1;
+
+            FormGame myForm = new FormGame(this, id);
+            myForm.parseFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+
 
             myForm.Show();
         }
         public List<string> readStats()
         {
-            this.listAllPlayer.Clear();
+            listAllPlayer.Clear();
             string path = "statistique.txt";
             string[] readText = File.ReadAllLines(path);
             List<string> strings = new List<string>();
@@ -68,16 +63,16 @@ namespace Echec
                 strings.Add(s);
                 count++;
 
-                if(count == 5)
+                if (count == 5)
                 {
-                        Joueur player = new Joueur(strings.ElementAt(0), strings.ElementAt(1), strings.ElementAt(2), strings.ElementAt(3));
-                        listAllPlayer.Add(player);
+                    Joueur player = new Joueur(strings.ElementAt(0), strings.ElementAt(1), strings.ElementAt(2), strings.ElementAt(3));
+                    listAllPlayer.Add(player);
                     count = 0;
                     strings.Clear();
                 }
             }
 
-            for(int i = 0; i < listAllPlayer.Count(); i++)
+            for (int i = 0; i < listAllPlayer.Count(); i++)
             {
                 playerNames.Add(listAllPlayer.ElementAt(i).Name);
             }
@@ -86,8 +81,9 @@ namespace Echec
 
         public void newPlayer(string name)
         {
-            if (!isUserExisting(name)) { 
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer);
+            if (!isUserExisting(name))
+            {
+                string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer);
                 using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "statistique.txt"), true))
                 {
                     outputFile.WriteLine(name);
@@ -96,9 +92,6 @@ namespace Echec
                     outputFile.WriteLine("0");
                     outputFile.WriteLine("/");
                 }
-            } else
-            {
-
             }
         }
 
@@ -119,12 +112,12 @@ namespace Echec
 
             foreach (string s in readText)
             {
-                if(s.Equals(name))
+                if (s.Equals(name))
                 {
                     return true;
                 }
             }
-                return false;
+            return false;
         }
 
         public Joueur getPlayer(string name)

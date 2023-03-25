@@ -1,15 +1,4 @@
 ﻿using Echec.Properties;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Echec.view
 {
@@ -26,7 +15,7 @@ namespace Echec.view
             get { return id; }
         }
 
-        public FormGame(Echec chess,int id)
+        public FormGame(Echec chess, int id)
         {
             this.chess = chess;
             this.id = id;
@@ -64,7 +53,7 @@ namespace Echec.view
 
                 // Does the move after second click
                 playMove(start.X, start.Y, end.X, end.Y);
-                
+
                 clickCounter = 0;
             }
         }
@@ -82,13 +71,25 @@ namespace Echec.view
 
             string[] rows = parts[0].Split('/');
 
+            int row = 0;
+            int col = 0;
+
             for (int i = 0; i < rows.Length; i++)
             {
                 for (int j = 0; j < rows[i].Length; j++)
                 {
                     char c = rows[i][j];
-                    int x = j * (chessboard.Width / 8);
-                    int y = (7 - i) * (chessboard.Height / 8);
+                    int x = col * (chessboard.Width / 8);
+                    int y = row * (chessboard.Height / 8);
+
+                    if (char.IsDigit(c))
+                    {
+                        col += int.Parse(c.ToString());
+                    }
+                    else if (char.IsLetter(c))
+                    {
+                        col++;
+                    }
 
                     switch (c)
                     {
@@ -130,6 +131,8 @@ namespace Echec.view
                             break;
                     }
                 }
+                row++;
+                col = 0;
             }
         }
 
@@ -150,11 +153,6 @@ namespace Echec.view
         {
             chessboard.Image.Dispose();
             chessboard.Image = global::Echec.Properties.Resources.chessboard;
-        }
-
-        private void Form1_load(object sender, EventArgs e)
-        {
-            parseFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
         }
     }
 }

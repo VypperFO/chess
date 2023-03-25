@@ -1,40 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Echec.model
+﻿namespace Echec.model
 {
     public class Partie
     {
         private List<Joueur> listPlayers;
         private Plateau board;
-        private List<string> listBoardConfig;
-        private int id;
+        private List<Plateau> listBoardConfig;
 
-        public Partie() { }
-        public int Id
+        public Partie()
         {
-            get { return id; }
-        }
-
-        public Partie(int id)
-        {
-            this.board = new Plateau();
-            this.listBoardConfig = new List<string>();
-            this.listBoardConfig.Add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-            this.id = id;
+            board = new Plateau();
+            listBoardConfig = new List<Plateau>();
+            listBoardConfig.Add(board);
         }
 
         public string playMove(Coordonnée coords)
         {
-            string boardMoved = board.playMove(coords, listBoardConfig.ElementAt(listBoardConfig.Count -1));
+            Plateau boardMoved = board.playMove(coords);
 
             if (boardMoved != null)
             {
                 listBoardConfig.Add(boardMoved);
-                return boardMoved;
+                return boardMoved.ToString();
             }
             return null;
         }
@@ -45,6 +31,6 @@ namespace Echec.model
             set { board = value; }
         }
 
-        
+
     }
 }

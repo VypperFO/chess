@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Echec.model.pieces
+﻿namespace Echec.model.pieces
 {
     public class Pion : PieceSpecial
     {
         private bool isEnPassant;
 
         public Pion() { }
-        public Pion(string name, bool isMoved, bool isEnPassant)
+        public Pion(char type, bool isEnPassant, bool isMoved = false)
         {
-            Name = name;
+            Type = type;
             IsMoved = isMoved;
             IsEnPassant = isEnPassant;
         }

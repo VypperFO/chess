@@ -1,15 +1,4 @@
-﻿using Echec.model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Echec.view
+﻿namespace Echec.view
 {
     public partial class FormMenu : Form
     {
@@ -20,12 +9,12 @@ namespace Echec.view
             this.chess = chess;
             InitializeComponent();
             List<string> strings = chess.readStats();
-    
-            foreach(string s in strings)
+
+            foreach (string s in strings)
             {
                 listBox1.Items.Add(s);
             }
-              
+
         }
 
         private void btnNewGame_Click(object sender, EventArgs e)
@@ -51,21 +40,21 @@ namespace Echec.view
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
- 
+
             label1.Text = "";
             label2.Text = "";
             label3.Text = "";
             int index = listBox1.SelectedIndex;
             List<string> strings = chess.getStats(index);
             string nbNull = strings.ElementAt(0);
-           string nbVictory = strings.ElementAt(1);
+            string nbVictory = strings.ElementAt(1);
             string nbDefeat = strings.ElementAt(2);
             string label1text = label1.Text;
             label1.Text = "Null : " + nbNull;
             string label2text = label2.Text;
             label2.Text = "Victoire : " + nbVictory;
             string label3text = label3.Text;
-            label3.Text = "Défaite : " + nbDefeat;      
+            label3.Text = "Défaite : " + nbDefeat;
         }
 
         private void label6_Click(object sender, EventArgs e)

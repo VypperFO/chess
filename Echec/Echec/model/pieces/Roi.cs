@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Echec.model.pieces
+﻿namespace Echec.model.pieces
 {
-    public class Roi: PieceSpecial
+    public class Roi : PieceSpecial
     {
         public Roi() { }
-        public Roi(string name, bool isMoved) 
+        public Roi(char type, bool isMoved = false)
         {
-            Name = name;
+            Type = type;
             IsMoved = isMoved;
         }
     }
