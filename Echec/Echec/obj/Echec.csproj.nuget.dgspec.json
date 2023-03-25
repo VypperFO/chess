@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\felix\\Desktop\\chessFinal\\Echec\\Echec\\Echec.csproj": {}
+    "C:\\Users\\felix\\OneDrive\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj": {}
   },
   "projects": {
-    "C:\\Users\\felix\\Desktop\\chessFinal\\Echec\\Echec\\Echec.csproj": {
+    "C:\\Users\\felix\\OneDrive\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\felix\\Desktop\\chessFinal\\Echec\\Echec\\Echec.csproj",
+        "projectUniqueName": "C:\\Users\\felix\\OneDrive\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj",
         "projectName": "Echec",
-        "projectPath": "C:\\Users\\felix\\Desktop\\chessFinal\\Echec\\Echec\\Echec.csproj",
+        "projectPath": "C:\\Users\\felix\\OneDrive\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj",
         "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\felix\\Desktop\\chessFinal\\Echec\\Echec\\obj\\",
+        "outputPath": "C:\\Users\\felix\\OneDrive\\Bureau\\chessFinal\\Echec\\Echec\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\felix\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -57,7 +57,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -10,20 +10,10 @@
             IsMoved = isMoved;
         }
 
-        public override bool playMove(int indexStart, int indexEnd)
+        public override bool playMove(int startIndex, int endIndex)
         {
-            indexStart++;
-            indexEnd++;
-
-            if (indexEnd == indexStart + 1 || (indexStart == 2 && indexEnd == 4))
-            {
-                return true;
-            }
-            else if ((indexEnd == indexStart + 2 && indexStart == 2) || (indexEnd == indexStart + 1 && (indexStart % 2 != indexEnd % 2)))
-            {
-                return true;
-            }
-            return false;
+            // TODO
+            return true;
         }
     }
 }

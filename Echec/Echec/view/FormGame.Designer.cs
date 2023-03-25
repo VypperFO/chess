@@ -28,55 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.chessboard = new System.Windows.Forms.PictureBox();
-            this.labWhichTurn = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.chessboard)).BeginInit();
-            this.SuspendLayout();
+            chessboard = new PictureBox();
+            labWhichTurn = new Label();
+            label1 = new Label();
+            ((System.ComponentModel.ISupportInitialize)chessboard).BeginInit();
+            SuspendLayout();
             // 
             // chessboard
             // 
-            this.chessboard.Image = global::Echec.Properties.Resources.chessboard;
-            this.chessboard.Location = new System.Drawing.Point(12, 12);
-            this.chessboard.Name = "chessboard";
-            this.chessboard.Size = new System.Drawing.Size(800, 800);
-            this.chessboard.TabIndex = 0;
-            this.chessboard.TabStop = false;
-            this.chessboard.Click += new System.EventHandler(this.pictureBox1_Click);
+            chessboard.Image = Properties.Resources.chessboard;
+            chessboard.Location = new Point(14, 16);
+            chessboard.Margin = new Padding(3, 4, 3, 4);
+            chessboard.Name = "chessboard";
+            chessboard.Size = new Size(800, 800);
+            chessboard.TabIndex = 0;
+            chessboard.TabStop = false;
+            chessboard.Click += pictureBox1_Click;
             // 
             // labWhichTurn
             // 
-            this.labWhichTurn.AutoSize = true;
-            this.labWhichTurn.Location = new System.Drawing.Point(830, 25);
-            this.labWhichTurn.Name = "labWhichTurn";
-            this.labWhichTurn.Size = new System.Drawing.Size(36, 15);
-            this.labWhichTurn.TabIndex = 1;
-            this.labWhichTurn.Text = "Blanc";
+            labWhichTurn.AutoSize = true;
+            labWhichTurn.Location = new Point(949, 33);
+            labWhichTurn.Name = "labWhichTurn";
+            labWhichTurn.Size = new Size(45, 20);
+            labWhichTurn.TabIndex = 1;
+            labWhichTurn.Text = "Blanc";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(830, 56);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Blanc";
+            label1.AutoSize = true;
+            label1.Location = new Point(949, 75);
+            label1.Name = "label1";
+            label1.Size = new Size(45, 20);
+            label1.TabIndex = 2;
+            label1.Text = "Blanc";
             // 
             // FormGame
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 961);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.labWhichTurn);
-            this.Controls.Add(this.chessboard);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "FormGame";
-            this.Text = "Game";
-            ((System.ComponentModel.ISupportInitialize)(this.chessboard)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1125, 1055);
+            Controls.Add(label1);
+            Controls.Add(labWhichTurn);
+            Controls.Add(chessboard);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "FormGame";
+            Text = "Game";
+            ((System.ComponentModel.ISupportInitialize)chessboard).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

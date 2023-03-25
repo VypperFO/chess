@@ -65,6 +65,14 @@ namespace Echec.model
             return y * 8 + x;
         }
 
+        public bool IsPieceAtPosition(int x, int y)
+        {
+            if (pieces[getIndexChange(x, y)] == null)
+            {
+                return false;
+            }
+            return true;
+        }
 
         private void initPieces()
         {
@@ -91,37 +99,37 @@ namespace Echec.model
                                 pieces[index] = new Pion(c);
                                 break;
                             case 'N':
-                                pieces[index] = new Cavalier(c);
+                                pieces[index] = new Cavalier(c, pieces);
                                 break;
                             case 'B':
-                                pieces[index] = new Fou(c);
+                                pieces[index] = new Fou(c, pieces);
                                 break;
                             case 'R':
-                                pieces[index] = new Tour(c);
+                                pieces[index] = new Tour(c, pieces);
                                 break;
                             case 'Q':
-                                pieces[index] = new Reine(c);
+                                pieces[index] = new Reine(c, pieces);
                                 break;
                             case 'K':
-                                pieces[index] = new Roi(c);
+                                pieces[index] = new Roi(c, pieces);
                                 break;
                             case 'p':
                                 pieces[index] = new Pion(c);
                                 break;
                             case 'n':
-                                pieces[index] = new Cavalier(c);
+                                pieces[index] = new Cavalier(c, pieces);
                                 break;
                             case 'b':
-                                pieces[index] = new Fou(c);
+                                pieces[index] = new Fou(c, pieces);
                                 break;
                             case 'r':
-                                pieces[index] = new Tour(c);
+                                pieces[index] = new Tour(c, pieces);
                                 break;
                             case 'q':
-                                pieces[index] = new Reine(c);
+                                pieces[index] = new Reine(c, pieces);
                                 break;
                             case 'k':
-                                pieces[index] = new Roi(c);
+                                pieces[index] = new Roi(c, pieces);
                                 break;
                         }
                         index++;

@@ -3,19 +3,30 @@
     public class Cavalier : Piece
     {
         public Cavalier() { }
-        public Cavalier(char type)
+        public Cavalier(char type, Piece[] pieces)
         {
             Type = type;
+            Pieces = pieces;
         }
 
-        public override bool playMove(int indexStart, int indexEnd)
+        public override bool playMove(int startIndex, int endIndex)
         {
-            indexStart++;
-            indexEnd++;
-            if (Math.Abs(indexEnd - indexStart) == 3 && Math.Abs(indexEnd % 2 - indexStart % 2) == 1)
+            int startX = startIndex % 8;
+            int startY = startIndex / 8;
+            int endX = endIndex % 8;
+            int endY = endIndex / 8;
+
+            int deltaX = Math.Abs(startX - endX);
+            int deltaY = Math.Abs(startY - endY);
+
+            if ((deltaX == 1 && deltaY == 2) || (deltaX == 2 && deltaY == 1))
             {
-                return true;
+                if (Pieces[endIndex] == null)
+                {
+                    return true;
+                }
             }
+
             return false;
         }
     }
