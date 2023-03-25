@@ -8,8 +8,8 @@ namespace Echec
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
-        public List<Joueur> listAllPlayer = new List<Joueur>();
-        public List<Partie> listGame = new List<Partie>();
+        private List<Joueur> listAllPlayer = new List<Joueur>();
+        private List<Partie> listGame = new List<Partie>();
 
         static void Main()
         {

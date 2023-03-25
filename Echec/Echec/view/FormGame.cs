@@ -67,6 +67,8 @@ namespace Echec.view
         public void parseFen(string fen)
         {
             clear();
+            Bitmap bmp = new Bitmap(chessboard.Image);
+
             string[] parts = fen.Split(' ');
 
             string[] rows = parts[0].Split('/');
@@ -94,59 +96,55 @@ namespace Echec.view
                     switch (c)
                     {
                         case 'P':
-                            drawPiece(x, y, Resources.wpawn);
+                            drawPiece(x, y, Resources.wpawn, bmp);
                             break;
                         case 'N':
-                            drawPiece(x, y, Resources.wknight);
+                            drawPiece(x, y, Resources.wknight, bmp);
                             break;
                         case 'B':
-                            drawPiece(x, y, Resources.wbishop);
+                            drawPiece(x, y, Resources.wbishop, bmp);
                             break;
                         case 'R':
-                            drawPiece(x, y, Resources.wrook);
+                            drawPiece(x, y, Resources.wrook, bmp);
                             break;
                         case 'Q':
-                            drawPiece(x, y, Resources.wqueen);
+                            drawPiece(x, y, Resources.wqueen, bmp);
                             break;
                         case 'K':
-                            drawPiece(x, y, Resources.wking);
+                            drawPiece(x, y, Resources.wking, bmp);
                             break;
                         case 'p':
-                            drawPiece(x, y, Resources.bpawn);
+                            drawPiece(x, y, Resources.bpawn, bmp);
                             break;
                         case 'n':
-                            drawPiece(x, y, Resources.bknight);
+                            drawPiece(x, y, Resources.bknight, bmp);
                             break;
                         case 'b':
-                            drawPiece(x, y, Resources.bbishop);
+                            drawPiece(x, y, Resources.bbishop, bmp);
                             break;
                         case 'r':
-                            drawPiece(x, y, Resources.brook);
+                            drawPiece(x, y, Resources.brook, bmp);
                             break;
                         case 'q':
-                            drawPiece(x, y, Resources.bqueen);
+                            drawPiece(x, y, Resources.bqueen, bmp);
                             break;
                         case 'k':
-                            drawPiece(x, y, Resources.bking);
+                            drawPiece(x, y, Resources.bking, bmp);
                             break;
                     }
                 }
                 row++;
                 col = 0;
             }
+            chessboard.Image = bmp;
+            GC.Collect();
         }
 
-        private void drawPiece(int x, int y, Bitmap imageName)
+        private void drawPiece(int x, int y, Bitmap imageName, Bitmap bmp)
         {
-            Bitmap bmp = new Bitmap(chessboard.Image);
-
             Graphics g = Graphics.FromImage(bmp);
-
-            Bitmap piece = new Bitmap(imageName);
-
-            g.DrawImage(piece, new Rectangle(x, y, (chessboard.Height / 8), (chessboard.Width / 8)));
-
-            chessboard.Image = bmp;
+            g.DrawImage(imageName, new Rectangle(x, y, (chessboard.Height / 8), (chessboard.Width / 8)));
+            g.Dispose();
         }
 
         private void clear()
