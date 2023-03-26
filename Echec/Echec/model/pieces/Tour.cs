@@ -4,27 +4,22 @@
     {
 
         public Tour() { }
-        public Tour(char type, Piece[] pieces, bool isMoved = false)
+        public Tour(char type, Piece[] pieces, bool isMoved = false): base(type, pieces, isMoved)
         {
-            Type = type;
-            Pieces = pieces;
-            IsMoved = isMoved;
         }
 
-        public override bool playMove(int startIndex, int endIndex)
+        public override bool PlayMove(int startIndex, int endIndex)
         {
             int startX = startIndex % 8;
             int startY = startIndex / 8;
             int endX = endIndex % 8;
             int endY = endIndex / 8;
 
-            // check if the movement horizontal or vertical
             if (startX != endX && startY != endY)
             {
                 return false;
             }
 
-            // check if any pieces in way
             int xDir = Math.Sign(endX - startX);
             int yDir = Math.Sign(endY - startY);
             int x = startX + xDir;

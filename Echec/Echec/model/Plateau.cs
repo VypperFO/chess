@@ -21,12 +21,12 @@ namespace Echec.model
 
             Piece piece = pieces[indexStart];
 
-            if(piece == null || !piece.playMove(indexStart, indexEnd))
+            if(piece == null || !checkTurn(piece) || !piece.PlayMove(indexStart, indexEnd))
             {
                 return null;
             }
 
-            //changeTurn();
+            changeTurn();
             pieces.SetValue(pieces[indexStart], indexEnd);
             pieces.SetValue(null, indexStart);
             return this;
@@ -96,7 +96,7 @@ namespace Echec.model
                         switch (c)
                         {
                             case 'P':
-                                pieces[index] = new Pion(c);
+                                pieces[index] = new Pion(c, pieces);
                                 break;
                             case 'N':
                                 pieces[index] = new Cavalier(c, pieces);
@@ -114,7 +114,7 @@ namespace Echec.model
                                 pieces[index] = new Roi(c, pieces);
                                 break;
                             case 'p':
-                                pieces[index] = new Pion(c);
+                                pieces[index] = new Pion(c, pieces);
                                 break;
                             case 'n':
                                 pieces[index] = new Cavalier(c, pieces);

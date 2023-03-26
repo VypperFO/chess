@@ -4,13 +4,12 @@
     {
         public Pion() { }
 
-        public Pion(char type, bool isMoved = false)
+        public Pion(char type, Piece[] pieces, bool isMoved = false): base(type, pieces)
         {
-            Type = type;
             IsMoved = isMoved;
         }
 
-        public override bool playMove(int startIndex, int endIndex)
+        public override bool PlayMove(int startIndex, int endIndex)
         {
             // TODO
             return true;

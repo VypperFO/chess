@@ -3,15 +3,9 @@
     public class Roi : PieceSpecial
     {
         public Roi() { }
-        public Roi(char type, Piece[] pieces,bool isMoved = false)
+        public Roi(char type, Piece[] pieces,bool isMoved = false): base(type, pieces, isMoved) { }
+        public override bool PlayMove(int startIndex, int endIndex)
         {
-            Type = type;
-            Pieces = pieces;
-            IsMoved = isMoved;
-        }
-        public override bool playMove(int startIndex, int endIndex)
-        {
-            // pas trop sur si on garde cest sketch
             int startX = startIndex % 8;
             int startY = startIndex / 8;
             int endX = endIndex % 8;

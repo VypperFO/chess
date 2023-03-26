@@ -2,8 +2,8 @@
 {
     public class Piece
     {
-        public Piece[] Pieces { get; set; }
         public char Type { get; set; }
+        public Piece[] Pieces { get; set; }
 
         public Piece() { }
 
@@ -13,8 +13,6 @@
             Pieces = pieces;
         }
 
-        public virtual bool playMove(int startIndex, int endIndex) {
-            return false;
-        }
+        public virtual bool PlayMove(int startIndex, int endIndex) { return false; }
     }
 }

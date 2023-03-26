@@ -5,26 +5,20 @@ namespace Echec.model.pieces
     public class Fou : Piece
     {
         public Fou() { }
-        public Fou(char type, Piece[] pieces)
-        {
-            Type = type;
-            Pieces = pieces;
-        }
+        public Fou(char type, Piece[] pieces): base(type, pieces) { }
 
-        public override bool playMove(int startIndex, int endIndex)
+        public override bool PlayMove(int startIndex, int endIndex)
         {
             int startX = startIndex % 8;
             int startY = startIndex / 8;
             int endX = endIndex % 8;
             int endY = endIndex / 8;
 
-            // Check if the movement is diagonal
             if (Math.Abs(startX - endX) != Math.Abs(startY - endY))
             {
                 return false;
             }
 
-            // Check if there are any pieces in the way
             int xDir = Math.Sign(endX - startX);
             int yDir = Math.Sign(endY - startY);
             int x = startX + xDir;
@@ -40,7 +34,6 @@ namespace Echec.model.pieces
                 y += yDir;
             }
 
-            // The movement is valid
             return true;
         }
     }

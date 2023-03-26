@@ -3,13 +3,11 @@
     public class Cavalier : Piece
     {
         public Cavalier() { }
-        public Cavalier(char type, Piece[] pieces)
+        public Cavalier(char type, Piece[] pieces): base(type, pieces)
         {
-            Type = type;
-            Pieces = pieces;
         }
 
-        public override bool playMove(int startIndex, int endIndex)
+        public override bool PlayMove(int startIndex, int endIndex)
         {
             int startX = startIndex % 8;
             int startY = startIndex / 8;

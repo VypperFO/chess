@@ -1,4 +1,5 @@
 ﻿using Echec.Properties;
+using System.Drawing;
 
 namespace Echec.view
 {
@@ -8,40 +9,33 @@ namespace Echec.view
         private Point start;
         private Point end;
         private Echec chess;
-        private int id;
 
-        public int Id
-        {
-            get { return id; }
-        }
+        public int Id { get; set; }
 
-        public FormGame(Echec chess, int id)
+        public FormGame(Echec chess)
         {
             this.chess = chess;
-            this.id = id;
             InitializeComponent();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            clickSelection(e);
+            Bitmap bmp = new Bitmap(chessboard.Image);
+            DrawSquare(start.X, start.Y, bmp);
         }
 
-        private void clickSelection(EventArgs e)
+        private void ClickSelection(EventArgs e)
         {
             clickCounter++;
-
-            if (clickCounter == 1)
-            {
-                label1.Text = "";
-            }
 
             if (clickCounter == 1)
             {
                 MouseEventArgs meStart = (MouseEventArgs)e;
                 Point coordinates = meStart.Location;
                 start = coordinates;
-                labWhichTurn.Text = start.ToString();
+
+                label2.Visible = false;
+                label1.Text = start.ToString();
             }
 
             if (clickCounter == 2)
@@ -49,28 +43,29 @@ namespace Echec.view
                 MouseEventArgs meDestination = (MouseEventArgs)e;
                 Point coordinates2 = meDestination.Location;
                 end = coordinates2;
-                label1.Text = end.ToString();
+
+                label2.Visible = true;
+                label2.Text = end.ToString();
 
                 // Does the move after second click
-                playMove(start.X, start.Y, end.X, end.Y);
+                PlayMove(start.X, start.Y, end.X, end.Y);
 
                 clickCounter = 0;
             }
         }
 
-        private void playMove(int xStart, int yStart, int xEnd, int yEnd)
+        private void PlayMove(int xStart, int yStart, int xEnd, int yEnd)
         {
-            chess.playMove(xStart, yStart, xEnd, yEnd, this);
+            chess.PlayMove(xStart, yStart, xEnd, yEnd, this);
         }
 
 
-        public void parseFen(string fen)
+        public void ParseFen(string fen)
         {
-            clear();
+            ClearBoard();
             Bitmap bmp = new Bitmap(chessboard.Image);
 
             string[] parts = fen.Split(' ');
-
             string[] rows = parts[0].Split('/');
 
             int row = 0;
@@ -96,40 +91,40 @@ namespace Echec.view
                     switch (c)
                     {
                         case 'P':
-                            drawPiece(x, y, Resources.wpawn, bmp);
+                            DrawPiece(x, y, Resources.wpawn, bmp);
                             break;
                         case 'N':
-                            drawPiece(x, y, Resources.wknight, bmp);
+                            DrawPiece(x, y, Resources.wknight, bmp);
                             break;
                         case 'B':
-                            drawPiece(x, y, Resources.wbishop, bmp);
+                            DrawPiece(x, y, Resources.wbishop, bmp);
                             break;
                         case 'R':
-                            drawPiece(x, y, Resources.wrook, bmp);
+                            DrawPiece(x, y, Resources.wrook, bmp);
                             break;
                         case 'Q':
-                            drawPiece(x, y, Resources.wqueen, bmp);
+                            DrawPiece(x, y, Resources.wqueen, bmp);
                             break;
                         case 'K':
-                            drawPiece(x, y, Resources.wking, bmp);
+                            DrawPiece(x, y, Resources.wking, bmp);
                             break;
                         case 'p':
-                            drawPiece(x, y, Resources.bpawn, bmp);
+                            DrawPiece(x, y, Resources.bpawn, bmp);
                             break;
                         case 'n':
-                            drawPiece(x, y, Resources.bknight, bmp);
+                            DrawPiece(x, y, Resources.bknight, bmp);
                             break;
                         case 'b':
-                            drawPiece(x, y, Resources.bbishop, bmp);
+                            DrawPiece(x, y, Resources.bbishop, bmp);
                             break;
                         case 'r':
-                            drawPiece(x, y, Resources.brook, bmp);
+                            DrawPiece(x, y, Resources.brook, bmp);
                             break;
                         case 'q':
-                            drawPiece(x, y, Resources.bqueen, bmp);
+                            DrawPiece(x, y, Resources.bqueen, bmp);
                             break;
                         case 'k':
-                            drawPiece(x, y, Resources.bking, bmp);
+                            DrawPiece(x, y, Resources.bking, bmp);
                             break;
                     }
                 }
@@ -137,20 +132,38 @@ namespace Echec.view
                 col = 0;
             }
             chessboard.Image = bmp;
+            labWhichTurn.Text = parts[1];
+
             GC.Collect();
         }
 
-        private void drawPiece(int x, int y, Bitmap imageName, Bitmap bmp)
+        private void DrawPiece(int x, int y, Bitmap imageName, Bitmap bmp)
         {
+            Pen pen = new(Color.Black, -5);
             Graphics g = Graphics.FromImage(bmp);
             g.DrawImage(imageName, new Rectangle(x, y, (chessboard.Height / 8), (chessboard.Width / 8)));
             g.Dispose();
         }
 
-        private void clear()
+        private static void DrawSquare(int x, int y, Bitmap bmp)
+        {
+            Pen pen = new(Color.White, 2);
+            Graphics formGraphics;
+            formGraphics = Graphics.FromImage(bmp);
+            formGraphics.DrawRectangle(pen, new Rectangle(500, 500, 100, 100));
+            pen.Dispose();
+            formGraphics.Dispose();
+        }
+
+        private void ClearBoard()
         {
             chessboard.Image.Dispose();
-            chessboard.Image = global::Echec.Properties.Resources.chessboard;
+            chessboard.Image = Resources.chessboard;
+        }
+
+        private void chessboard_MouseDown(object sender, MouseEventArgs e)
+        {
+            ClickSelection(e);
         }
     }
 }

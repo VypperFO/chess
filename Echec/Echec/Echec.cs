@@ -8,45 +8,46 @@ namespace Echec
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
-        private List<Joueur> listAllPlayer = new List<Joueur>();
-        private List<Partie> listGame = new List<Partie>();
+        private List<Joueur> listAllPlayer = new();
+        private List<Partie> listGame = new();
 
         static void Main()
         {
-            Echec chess = new Echec();
+            Echec chess = new();
         }
 
         public Echec()
         {
             ApplicationConfiguration.Initialize();
-            view.FormMenu menu = new view.FormMenu(this);
+            FormMenu menu = new(this);
             Application.Run(menu);
         }
 
-        public void playMove(int xStart, int yStart, int xEnd, int yEnd, FormGame form)
+        public void PlayMove(int xStart, int yStart, int xEnd, int yEnd, FormGame form)
         {
             Coordonnée coords = new Coordonnée(xStart, yStart, xEnd, yEnd);
             Partie game = listGame.ElementAt(form.Id);
-            string gameMove = game.playMove(coords);
 
-            form.parseFen(gameMove);
+            string turnPlayed = game.PlayMove(coords);
 
+            form.ParseFen(turnPlayed);
         }
 
-        public void newGame(FormMenu menu)
+        public void NewGame()
         {
-            Partie game = new Partie();
+            int id;
+            FormGame myForm = new(this);
+            Partie game = new();
+
             listGame.Add(game);
 
-            int id = listGame.Count - 1;
+            id = listGame.Count - 1;
+            myForm.Id = id;
 
-            FormGame myForm = new FormGame(this, id);
-            myForm.parseFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-
-
+            myForm.ParseFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
             myForm.Show();
         }
-        public List<string> readStats()
+        public List<string> ReadStats()
         {
             listAllPlayer.Clear();
             string path = "statistique.txt";
@@ -76,9 +77,9 @@ namespace Echec
             return playerNames;
         }
 
-        public void newPlayer(string name)
+        public void NewPlayer(string name)
         {
-            if (!isUserExisting(name))
+            if (!IsUserExisting(name))
             {
                 string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer);
                 using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "statistique.txt"), true))
@@ -92,7 +93,7 @@ namespace Echec
             }
         }
 
-        public List<string> getStats(int index)
+        public List<string> GetStats(int index)
         {
             List<string> strings = new List<string>();
             strings.Add(listAllPlayer.ElementAt(index).NbNull);
@@ -102,7 +103,7 @@ namespace Echec
             return strings;
         }
 
-        public bool isUserExisting(string name)
+        public bool IsUserExisting(string name)
         {
             string path = "statistique.txt";
             string[] readText = File.ReadAllLines(path);
@@ -117,7 +118,7 @@ namespace Echec
             return false;
         }
 
-        public Joueur getPlayer(string name)
+        public Joueur GetPlayer(string name)
         {
 
             foreach (Joueur player in listAllPlayer)

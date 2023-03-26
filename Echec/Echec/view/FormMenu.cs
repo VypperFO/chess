@@ -8,7 +8,7 @@
 
             this.chess = chess;
             InitializeComponent();
-            List<string> strings = chess.readStats();
+            List<string> strings = chess.ReadStats();
 
             foreach (string s in strings)
             {
@@ -19,17 +19,17 @@
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
-            chess.newGame(this);
+            chess.NewGame();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.TextLength > 0)
             {
-                chess.newPlayer(textBox1.Text);
+                chess.NewPlayer(textBox1.Text);
                 textBox1.Text = "";
                 listBox1.Items.Clear();
-                List<string> strings = chess.readStats();
+                List<string> strings = chess.ReadStats();
 
                 foreach (string s in strings)
                 {
@@ -45,7 +45,7 @@
             label2.Text = "";
             label3.Text = "";
             int index = listBox1.SelectedIndex;
-            List<string> strings = chess.getStats(index);
+            List<string> strings = chess.GetStats(index);
             string nbNull = strings.ElementAt(0);
             string nbVictory = strings.ElementAt(1);
             string nbDefeat = strings.ElementAt(2);

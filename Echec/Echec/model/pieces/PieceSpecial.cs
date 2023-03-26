@@ -2,19 +2,12 @@
 {
     public abstract class PieceSpecial : Piece
     {
-        protected bool isMoved;
+        protected bool IsMoved { get; set; }
         public PieceSpecial() { }
 
-        public PieceSpecial(char type, bool isMoved)
+        public PieceSpecial(char type, Piece[] pieces,bool isMoved = false) : base(type, pieces)
         {
-            Type = type;
             IsMoved = isMoved;
-        }
-
-        public bool IsMoved
-        {
-            get { return isMoved; }
-            set { isMoved = value; }
         }
     }
 }

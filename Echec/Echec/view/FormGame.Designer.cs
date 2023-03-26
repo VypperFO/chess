@@ -31,6 +31,7 @@
             chessboard = new PictureBox();
             labWhichTurn = new Label();
             label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)chessboard).BeginInit();
             SuspendLayout();
             // 
@@ -43,7 +44,7 @@
             chessboard.Size = new Size(800, 800);
             chessboard.TabIndex = 0;
             chessboard.TabStop = false;
-            chessboard.Click += pictureBox1_Click;
+            chessboard.MouseDown += chessboard_MouseDown;
             // 
             // labWhichTurn
             // 
@@ -63,11 +64,21 @@
             label1.TabIndex = 2;
             label1.Text = "Blanc";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(949, 119);
+            label2.Name = "label2";
+            label2.Size = new Size(45, 20);
+            label2.TabIndex = 3;
+            label2.Text = "Blanc";
+            // 
             // FormGame
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1125, 1055);
+            Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(labWhichTurn);
             Controls.Add(chessboard);
@@ -85,5 +96,6 @@
         private PictureBox chessboard;
         private Label labWhichTurn;
         private Label label1;
+        private Label label2;
     }
 }
