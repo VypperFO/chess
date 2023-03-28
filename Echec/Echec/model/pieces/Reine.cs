@@ -12,7 +12,7 @@
             int endX = endIndex % 8;
             int endY = endIndex / 8;
 
-            if (Math.Abs(startX - endX) != Math.Abs(startY - endY) && startX != endX && startY != endY)
+            if (Math.Abs(startX - endX) != Math.Abs(startY - endY) && startX != endX && startY != endY || (startIndex == endIndex))
             {
                 return false;
             }
@@ -24,7 +24,7 @@
             while (x != endX || y != endY)
             {
                 int position = y * 8 + x;
-                if (Pieces[position] != null)
+                if (Pieces[position] != null || !SameColor(endIndex))
                 {
                     return false;
                 }

@@ -6,9 +6,9 @@ namespace Echec.view
     public partial class FormGame : Form
     {
         private int clickCounter = 0;
-        private Point start;
-        private Point end;
+        private Point start, end;
         private Echec chess;
+        private string[] pieces = new string[64];
 
         public int Id { get; set; }
 
@@ -16,12 +16,6 @@ namespace Echec.view
         {
             this.chess = chess;
             InitializeComponent();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            Bitmap bmp = new Bitmap(chessboard.Image);
-            DrawSquare(start.X, start.Y, bmp);
         }
 
         private void ClickSelection(EventArgs e)
@@ -33,6 +27,12 @@ namespace Echec.view
                 MouseEventArgs meStart = (MouseEventArgs)e;
                 Point coordinates = meStart.Location;
                 start = coordinates;
+
+                if (IsEmpty(start))
+                {
+                    clickCounter = 0;
+                    return;
+                }
 
                 label2.Visible = false;
                 label1.Text = start.ToString();
@@ -47,7 +47,6 @@ namespace Echec.view
                 label2.Visible = true;
                 label2.Text = end.ToString();
 
-                // Does the move after second click
                 PlayMove(start.X, start.Y, end.X, end.Y);
 
                 clickCounter = 0;
@@ -70,6 +69,7 @@ namespace Echec.view
 
             int row = 0;
             int col = 0;
+            int index = 0;
 
             for (int i = 0; i < rows.Length; i++)
             {
@@ -82,10 +82,13 @@ namespace Echec.view
                     if (char.IsDigit(c))
                     {
                         col += int.Parse(c.ToString());
+                        index += int.Parse(c.ToString());
                     }
                     else if (char.IsLetter(c))
                     {
                         col++;
+                        pieces[index] = Convert.ToString(c);
+                        index++;
                     }
 
                     switch (c)
@@ -164,6 +167,22 @@ namespace Echec.view
         private void chessboard_MouseDown(object sender, MouseEventArgs e)
         {
             ClickSelection(e);
+        }
+
+        private bool IsEmpty(Point coords)
+        {
+            int index = GetIndex(coords.X / 100, coords.Y / 100);
+
+            if (pieces[index] == null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private int GetIndex(int x, int y)
+        {
+            return y * 8 + x;
         }
     }
 }

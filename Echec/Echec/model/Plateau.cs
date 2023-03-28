@@ -16,8 +16,8 @@ namespace Echec.model
         }
         public Plateau? playMove(Coordonnée coords)
         {
-            int indexStart = getIndexChange(coords.XStart / 100, coords.YStart / 100);
-            int indexEnd = getIndexChange(coords.XDestination / 100, coords.YDestination / 100);
+            int indexStart = getIndex(coords.XStart / 100, coords.YStart / 100);
+            int indexEnd = getIndex(coords.XDestination / 100, coords.YDestination / 100);
 
             Piece piece = pieces[indexStart];
 
@@ -60,14 +60,14 @@ namespace Echec.model
             }
         }
 
-        private int getIndexChange(int x, int y)
+        private int getIndex(int x, int y)
         {
             return y * 8 + x;
         }
 
         public bool IsPieceAtPosition(int x, int y)
         {
-            if (pieces[getIndexChange(x, y)] == null)
+            if (pieces[getIndex(x, y)] == null)
             {
                 return false;
             }

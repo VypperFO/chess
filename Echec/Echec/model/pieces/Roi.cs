@@ -14,7 +14,7 @@
             int deltaX = Math.Abs(startX - endX);
             int deltaY = Math.Abs(startY - endY);
 
-            if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1) || (deltaX == 1 && deltaY == 1))
+            if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1) || (deltaX == 1 && deltaY == 1) || !(startIndex == endIndex))
             {
                 if (Pieces[endIndex] == null)
                 {

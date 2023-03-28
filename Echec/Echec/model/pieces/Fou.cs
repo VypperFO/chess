@@ -14,7 +14,7 @@ namespace Echec.model.pieces
             int endX = endIndex % 8;
             int endY = endIndex / 8;
 
-            if (Math.Abs(startX - endX) != Math.Abs(startY - endY))
+            if (Math.Abs(startX - endX) != Math.Abs(startY - endY) || (startIndex == endIndex))
             {
                 return false;
             }

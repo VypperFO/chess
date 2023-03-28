@@ -19,7 +19,7 @@
 
             if ((deltaX == 1 && deltaY == 2) || (deltaX == 2 && deltaY == 1))
             {
-                if (Pieces[endIndex] == null)
+                if (Pieces[endIndex] == null || )
                 {
                     return true;
                 }

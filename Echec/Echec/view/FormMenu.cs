@@ -3,11 +3,14 @@
     public partial class FormMenu : Form
     {
         private Echec chess;
+        private int nbPlayer;
         public FormMenu(Echec chess)
         {
 
             this.chess = chess;
             InitializeComponent();
+            label7.Text = "";
+            label8.Text = "";
             List<string> strings = chess.ReadStats();
 
             foreach (string s in strings)
@@ -20,6 +23,7 @@
         private void btnNewGame_Click(object sender, EventArgs e)
         {
             chess.NewGame();
+            chess.sendPlayers(label7.Text, label8.Text);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -57,17 +61,34 @@
             label3.Text = "Défaite : " + nbDefeat;
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            label4.Text = "";
-            label5.Text = "";
             string text = listBox1.Text;
-            label4.Text = "joueur1 :" + text;
+            if (label7.Text.Length > 0 && nbPlayer < 2 && label7.Text != listBox1.Text)
+            {
+                label8.Text = text;
+                nbPlayer++;
+            } else if(nbPlayer < 2 && label7.Text != listBox1.Text) { 
+                label7.Text = text;
+                nbPlayer++;
+            }
+
+ 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Text == label7.Text)
+            {
+                label7.Text = "";
+                nbPlayer--;
+            }
+            else if (listBox1.Text == label8.Text)
+            {
+                label8.Text = "";
+                nbPlayer--;
+            }
         }
     }
 }

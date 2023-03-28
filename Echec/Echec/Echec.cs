@@ -1,5 +1,7 @@
 using Echec.model;
 using Echec.view;
+using Microsoft.VisualBasic;
+using System;
 
 namespace Echec
 {
@@ -129,6 +131,14 @@ namespace Echec
                 }
             }
             return null;
+        }
+        
+        public void sendPlayers(string playerOne, string playerTwo)
+        {
+            Joueur player1 = GetPlayer(playerOne);
+            Joueur player2 = GetPlayer(playerTwo);
+            Partie game = listGame.ElementAt(listGame.Count - 1);
+            game.addPlayerToGame(player1,player2);
         }
     }
 }
