@@ -1,5 +1,4 @@
 ﻿using Echec.model.pieces;
-using Echec.Properties;
 using System.Text;
 
 namespace Echec.model
@@ -14,52 +13,81 @@ namespace Echec.model
             whichTurn = "w";
             initPieces();
         }
-        public Plateau? playMove(Coordonnée coords)
+        public string playMove(Coordonnée coords)
         {
             int indexStart = getIndex(coords.XStart / 100, coords.YStart / 100);
             int indexEnd = getIndex(coords.XDestination / 100, coords.YDestination / 100);
 
             Piece piece = pieces[indexStart];
 
-            if(piece == null || !checkTurn(piece) || !piece.PlayMove(indexStart, indexEnd))
+            if (piece == null || !checkTurn(piece) || !piece.PlayMove(indexStart, indexEnd))
             {
                 return null;
             }
 
-            changeTurn();
+            if (isChecked() == "echec")
+            {
+                return null;
+            }
+
+            if(isChecked() == "WIN" || isChecked() == "win")
+            {
+                return isChecked();
+            }
+
+            Console.WriteLine(isChecked());
+
             pieces.SetValue(pieces[indexStart], indexEnd);
             pieces.SetValue(null, indexStart);
-            if (this.whichTurn == "w")
-            {
-                echecWhite();
-                echecBlack();
-            } else if(this.whichTurn == "b")
-            {
-                echecBlack();
-                echecWhite();
-            }
-            return this;
+            /*echecWhite();
+            echecBlack();*/
+            changeTurn();
+            return this.ToString();
         }
 
-        private void /*bool*/ echecWhite()
+        private string isChecked()
+        {
+            int possibleMoves;
+            if (whichTurn.Equals("w"))
+            {
+                possibleMoves = echecBlack().Count;
+                if (possibleMoves == 0)
+                {
+                    return "WIN";
+                }
+            }
+
+            if (whichTurn.Equals("b"))
+            {
+                possibleMoves = echecWhite().Count;
+                if (possibleMoves == 0)
+                {
+                    return "win";
+                }
+            }
+            return null;
+        }
+
+        private List<int> echecWhite()
         {
             List<int> dangerZoneBlack = new();
             List<int> moveRoiWhite = new();
 
             // Add all possible ending index
-            for(int i=0; i<pieces.Length -1; i++)
+            for (int i = 0; i < pieces.Length - 1; i++)
             {
                 Piece checkPieceMove = pieces[i];
-                for (int y = 0; y < pieces.Length -1; y++)
+                for (int y = 0; y < pieces.Length - 1; y++)
                 {
                     if (checkPieceMove != null && (Char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
                     {
                         if (checkPieceMove.PlayMove(i, y))
                         {
-                            if(checkPieceMove.Type == 'K')
+                            if (checkPieceMove.Type == 'K')
                             {
                                 moveRoiWhite.Add(y);
-                            } else
+                            }
+                            else
                             {
                                 dangerZoneBlack.Add(y);
                             }
@@ -68,26 +96,26 @@ namespace Echec.model
                 }
             }
 
-            for (int i = 0; i < moveRoiWhite.Count; i++)
+            for (int i = 0; i < dangerZoneBlack.Count; i++)
             {
-                for (int j = 0; j < dangerZoneBlack.Count; j++)
+                for (int j = 0; j < moveRoiWhite.Count; j++)
                 {
-                    if (moveRoiWhite.ElementAt(i) == dangerZoneBlack.ElementAt(j))
+                    if (moveRoiWhite.ElementAt(j) == dangerZoneBlack.ElementAt(i))
                     {
-                        moveRoiWhite.RemoveAt(i);
+                        moveRoiWhite.RemoveAt(j);
                     }
                 }
             }
             Console.WriteLine("White");
-                for (int i = 0; i < moveRoiWhite.Count; i++)
-                {
-                    Console.Write(moveRoiWhite.ElementAt(i) + ", ");
-                }
+            for (int i = 0; i < moveRoiWhite.Count; i++)
+            {
+                Console.Write(moveRoiWhite.ElementAt(i) + ", ");
+            }
             Console.WriteLine("");
-            //return dangerZone;
+            return moveRoiWhite;
         }
 
-        private void /*bool*/ echecBlack()
+        private List<int> echecBlack()
         {
             List<int> dangerZoneWhite = new();
             List<int> moveRoiBlack = new();
@@ -115,13 +143,13 @@ namespace Echec.model
                 }
             }
 
-            for (int i = 0; i < moveRoiBlack.Count; i++)
+            for (int i = 0; i < dangerZoneWhite.Count; i++)
             {
-                for (int j = 0; j < dangerZoneWhite.Count; j++)
+                for (int j = 0; j < moveRoiBlack.Count; j++)
                 {
-                    if (moveRoiBlack.ElementAt(i) == dangerZoneWhite.ElementAt(j))
+                    if (moveRoiBlack.ElementAt(j) == dangerZoneWhite.ElementAt(i))
                     {
-                        moveRoiBlack.RemoveAt(i);
+                        moveRoiBlack.RemoveAt(j);
                     }
                 }
             }
@@ -130,35 +158,40 @@ namespace Echec.model
             for (int i = 0; i < moveRoiBlack.Count; i++)
             {
                 Console.Write(moveRoiBlack.ElementAt(i) + ", ");
-                //return dangerZone;
             }
             Console.WriteLine("");
+            return moveRoiBlack;
         }
+
+
+       
+
 
         private bool checkTurn(Piece piece)
         {
-            switch (whichTurn) {
+            switch (whichTurn)
+            {
                 case "w":
                     return char.IsUpper(piece.Type);
                 case "b":
                     return char.IsLower(piece.Type);
-                default: 
+                default:
                     return false;
             }
         }
 
         private void changeTurn()
         {
-            switch(whichTurn)
+            switch (whichTurn)
             {
                 case "w":
-                    whichTurn= "b";
+                    whichTurn = "b";
                     break;
                 case "b":
-                    whichTurn= "w";
+                    whichTurn = "w";
                     break;
                 default:
-                    whichTurn= "w";
+                    whichTurn = "w";
                     break;
             }
         }
@@ -179,7 +212,8 @@ namespace Echec.model
 
         private void initPieces()
         {
-            string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+            //string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+            string fen = "k6p/7R/8/1Q6/8/8/8/K6P - 0 1";
 
             pieces = new Piece[64];
             string[] fields = fen.Split(' ');

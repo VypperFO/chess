@@ -78,12 +78,14 @@
             {
                 label8.Text = text;
                 nbPlayer++;
-            } else if(nbPlayer < 2 && label7.Text != listBox1.Text) { 
+            }
+            else if (nbPlayer < 2 && label7.Text != listBox1.Text)
+            {
                 label7.Text = text;
                 nbPlayer++;
             }
 
- 
+
         }
 
         private void button3_Click(object sender, EventArgs e)

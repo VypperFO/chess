@@ -193,5 +193,29 @@ namespace Echec.view
         {
             return y * 8 + x;
         }
+
+        public void gameWon(string joueur1)
+        {
+            string message = joueur1 + " a gagner la partie";
+            string title = "Partie Terminer";
+            MessageBoxButtons button = MessageBoxButtons.OK;
+            DialogResult result = MessageBox.Show(message, title, button);
+            if (result == DialogResult.OK)
+            {
+               Close();
+            }
+        }
+
+        public void gameNull()
+        {
+            string message = "La partie est null";
+            string title = "Partie Terminer";
+            MessageBoxButtons button = MessageBoxButtons.OK;
+            DialogResult result = MessageBox.Show(message, title, button);
+            if (result == DialogResult.OK)
+            {
+                Close();
+            }
+        }
     }
 }

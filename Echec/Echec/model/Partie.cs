@@ -18,19 +18,20 @@ namespace Echec.model
 
         public string PlayMove(Coordonnée coords)
         {
-            Plateau boardMoved = Board.playMove(coords);
+            string boardMoved = Board.playMove(coords);
 
             if (boardMoved != null)
             {
                 if (checkBoardConfig(listBoardConfig) != "")
                 {
                     return "null";
-                }  
-                listBoardConfig.Add(boardMoved.ToString());
+                }
+                
+                listBoardConfig.Add(boardMoved);
                 Console.WriteLine(listBoardConfig.ElementAt(listBoardConfig.Count - 1).ToString());
-                return boardMoved.ToString();
+                return boardMoved;
             }
-            return listBoardConfig.ElementAt(listBoardConfig.Count -1).ToString();
+            return listBoardConfig.ElementAt(listBoardConfig.Count -1);
         }
 
         public void addPlayerToGame(Joueur player1, Joueur player2)

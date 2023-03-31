@@ -38,8 +38,26 @@ namespace Echec
                Joueur Player2 = game.ListPlayers.ElementAt(1);
                 setNull(Player1.Name);
                 setNull(Player2.Name);
+                form.gameNull();
+            } else if(turnPlayed == "win")
+            {
+                Joueur Player1 = game.ListPlayers.ElementAt(0);
+                Joueur Player2 = game.ListPlayers.ElementAt(1);
+                setLoose(Player1.Name);
+                setWin(Player2.Name);
+                form.gameWon(Player2.Name);
+            } else if(turnPlayed == "WIN")
+            {
+                Joueur Player1 = game.ListPlayers.ElementAt(0);
+                Joueur Player2 = game.ListPlayers.ElementAt(1);
+                setWin(Player1.Name);
+                setLoose(Player2.Name);
+                form.gameWon(Player1.Name);
+            } else
+            {
+                form.ParseFen(turnPlayed);
             }
-            form.ParseFen(turnPlayed);
+
         }
 
         public void NewGame()
@@ -53,7 +71,8 @@ namespace Echec
             id = listGame.Count - 1;
             myForm.Id = id;
 
-            myForm.ParseFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+            //myForm.ParseFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+            myForm.ParseFen("k6p/7R/8/1Q6/8/8/8/K6P - 0 1");
             myForm.Show();
         }
         public List<string> ReadStats()
