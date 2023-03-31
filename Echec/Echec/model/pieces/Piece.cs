@@ -17,6 +17,11 @@
 
         public bool SameColor(int endIndex)
         {
+            if (Pieces[endIndex] == null)
+            {
+                return false;
+            }
+
             // White
             if(Char.IsUpper(Type) && Char.IsUpper(Pieces[endIndex].Type))
             {

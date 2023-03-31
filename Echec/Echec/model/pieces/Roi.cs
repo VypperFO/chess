@@ -14,12 +14,14 @@
             int deltaX = Math.Abs(startX - endX);
             int deltaY = Math.Abs(startY - endY);
 
-            if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1) || (deltaX == 1 && deltaY == 1) || !(startIndex == endIndex))
+            if (SameColor(endIndex))
             {
-                if (Pieces[endIndex] == null)
-                {
-                    return true;
-                }
+                return false;
+            }
+
+            if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1) || (deltaX == 1 && deltaY == 1))
+            {
+                return true;
             }
 
             return false;

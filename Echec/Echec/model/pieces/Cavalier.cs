@@ -17,12 +17,9 @@
             int deltaX = Math.Abs(startX - endX);
             int deltaY = Math.Abs(startY - endY);
 
-            if ((deltaX == 1 && deltaY == 2) || (deltaX == 2 && deltaY == 1))
+            if ((deltaX == 1 && deltaY == 2) || (deltaX == 2 && deltaY == 1) && !SameColor(endIndex))
             {
-                if (Pieces[endIndex] == null || )
-                {
-                    return true;
-                }
+                return true;
             }
 
             return false;

@@ -19,6 +19,11 @@ namespace Echec.model.pieces
                 return false;
             }
 
+            if (SameColor(endIndex))
+            {
+                return false;
+            }
+
             int xDir = Math.Sign(endX - startX);
             int yDir = Math.Sign(endY - startY);
             int x = startX + xDir;

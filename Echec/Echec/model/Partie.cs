@@ -5,15 +5,15 @@ namespace Echec.model
     public class Partie
     {
         public Plateau Board { get; set; }
-        private List<Joueur> listPlayers;
-        private List<Plateau> listBoardConfig;
+        public List<Joueur> ListPlayers { get; set; }
+        private List<string> listBoardConfig;
 
         public Partie()
         {
             Board = new Plateau();
-            listPlayers = new List<Joueur>();
-            listBoardConfig = new List<Plateau>();
-            listBoardConfig.Add(Board);
+            ListPlayers = new List<Joueur>();
+            listBoardConfig = new List<string>();
+            listBoardConfig.Add(Board.ToString());
         }
 
         public string PlayMove(Coordonnée coords)
@@ -22,8 +22,13 @@ namespace Echec.model
 
             if (boardMoved != null)
             {
-                listBoardConfig.Add(boardMoved);
+                listBoardConfig.Add(boardMoved.ToString());
+                if (checkBoardConfig(listBoardConfig) != "")
+                {
+                    return "null";
+                }  
                 return boardMoved.ToString();
+    
             }
             Console.WriteLine(listBoardConfig.ElementAt(listBoardConfig.Count - 1).ToString());
             return listBoardConfig.ElementAt(listBoardConfig.Count -1).ToString();
@@ -31,8 +36,25 @@ namespace Echec.model
 
         public void addPlayerToGame(Joueur player1, Joueur player2)
         {
-           listPlayers.Add(player1);
-           listPlayers.Add(player2);
+           ListPlayers.Add(player1);
+           ListPlayers.Add(player2);
+        }
+
+        public string checkBoardConfig(List<String> list)
+        {
+            var q = from x in list
+                    group x by x into g
+                    let count = g.Count()
+                    orderby count descending
+                    select new { Value = g.Key, Count = count };
+            foreach (var x in q)
+            {
+                if(x.Count == 5)
+                {
+                    return "null";
+                }
+            }
+            return "";
         }
     }
 }

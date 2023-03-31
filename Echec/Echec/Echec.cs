@@ -1,7 +1,9 @@
 using Echec.model;
+using Echec.model.pieces;
 using Echec.view;
 using Microsoft.VisualBasic;
 using System;
+using System.Windows.Forms.VisualStyles;
 
 namespace Echec
 {
@@ -29,9 +31,14 @@ namespace Echec
         {
             Coordonnée coords = new Coordonnée(xStart, yStart, xEnd, yEnd);
             Partie game = listGame.ElementAt(form.Id);
-
             string turnPlayed = game.PlayMove(coords);
-
+            if (turnPlayed == "null")
+            {
+               Joueur Player1 = game.ListPlayers.ElementAt(0);
+               Joueur Player2 = game.ListPlayers.ElementAt(1);
+                setNull(Player1.Name);
+                setNull(Player2.Name);
+            }
             form.ParseFen(turnPlayed);
         }
 
@@ -140,5 +147,65 @@ namespace Echec
             Partie game = listGame.ElementAt(listGame.Count - 1);
             game.addPlayerToGame(player1,player2);
         }
+
+        public void setNull(string name)
+        {
+            string path = "statistique.txt";
+            int index = 0;
+            var lines = System.IO.File.ReadAllLines("statistique.txt");
+            for(int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i] == name)
+                {
+                   index = i+3;
+                }
+            }
+            String[] arrLine = File.ReadAllLines(path);     
+            string var = arrLine[index];
+            int var2 = int.Parse(var);
+            var2 = var2 + 1;
+            arrLine[index] =var2.ToString();
+            File.WriteAllLines(path, arrLine);
+        }
+        public void setWin(string name)
+        {
+            string path = "statistique.txt";
+            int index = 0;
+            var lines = System.IO.File.ReadAllLines("statistique.txt");
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i] == name)
+                {
+                    index = i + 1;
+                }
+            }
+            String[] arrLine = File.ReadAllLines(path);
+            string var = arrLine[index];
+            int var2 = int.Parse(var);
+            var2 = var2 + 1;
+            arrLine[index] = var2.ToString();
+            File.WriteAllLines(path, arrLine);
+        }
+
+        public void setLoose(string name)
+        {
+            string path = "statistique.txt";
+            int index = 0;
+            var lines = System.IO.File.ReadAllLines("statistique.txt");
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i] == name)
+                {
+                    index = i + 2;
+                }
+            }
+            String[] arrLine = File.ReadAllLines(path);
+            string var = arrLine[index];
+            int var2 = int.Parse(var);
+            var2 = var2 + 1;
+            arrLine[index] = var2.ToString();
+            File.WriteAllLines(path, arrLine);
+        }
+
     }
 }

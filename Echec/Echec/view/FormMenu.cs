@@ -22,8 +22,11 @@
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
-            chess.NewGame();
-            chess.sendPlayers(label7.Text, label8.Text);
+            if (!(label7.Text == "" && label8.Text == ""))
+            {
+                chess.NewGame();
+                chess.sendPlayers(label7.Text, label8.Text);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,6 +47,12 @@
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            List<string> list = chess.ReadStats();
+
+            foreach (string s in list)
+            {
+                listBox1.Items.Add(s);
+            }
 
             label1.Text = "";
             label2.Text = "";

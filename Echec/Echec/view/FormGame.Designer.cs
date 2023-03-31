@@ -32,6 +32,7 @@
             this.labWhichTurn = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chessboard)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,11 +80,22 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Blanc";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1125, 41);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 25);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Tour :";
+            // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1406, 1319);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labWhichTurn);
@@ -104,5 +116,6 @@
         private Label labWhichTurn;
         private Label label1;
         private Label label2;
+        private Label label3;
     }
 }

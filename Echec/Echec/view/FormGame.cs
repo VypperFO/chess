@@ -91,6 +91,7 @@ namespace Echec.view
                         index++;
                     }
 
+
                     switch (c)
                     {
                         case 'P':
@@ -135,7 +136,14 @@ namespace Echec.view
                 col = 0;
             }
             chessboard.Image = bmp;
-            labWhichTurn.Text = parts[1];
+            if (parts[1] == "w")
+            {
+                labWhichTurn.Text = "Blanc";
+            } else if (parts[1] == "b")
+            {
+                labWhichTurn.Text = "Noir";
+            }
+  
 
             GC.Collect();
         }
