@@ -1,5 +1,6 @@
 ﻿using Echec.Properties;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 
 namespace Echec.view
 {

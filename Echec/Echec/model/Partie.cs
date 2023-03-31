@@ -22,15 +22,14 @@ namespace Echec.model
 
             if (boardMoved != null)
             {
-                listBoardConfig.Add(boardMoved.ToString());
                 if (checkBoardConfig(listBoardConfig) != "")
                 {
                     return "null";
                 }  
+                listBoardConfig.Add(boardMoved.ToString());
+                Console.WriteLine(listBoardConfig.ElementAt(listBoardConfig.Count - 1).ToString());
                 return boardMoved.ToString();
-    
             }
-            Console.WriteLine(listBoardConfig.ElementAt(listBoardConfig.Count - 1).ToString());
             return listBoardConfig.ElementAt(listBoardConfig.Count -1).ToString();
         }
 

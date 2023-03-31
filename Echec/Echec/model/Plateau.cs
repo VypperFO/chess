@@ -29,7 +29,110 @@ namespace Echec.model
             changeTurn();
             pieces.SetValue(pieces[indexStart], indexEnd);
             pieces.SetValue(null, indexStart);
+            if (this.whichTurn == "w")
+            {
+                echecWhite();
+                echecBlack();
+            } else if(this.whichTurn == "b")
+            {
+                echecBlack();
+                echecWhite();
+            }
             return this;
+        }
+
+        private void /*bool*/ echecWhite()
+        {
+            List<int> dangerZoneBlack = new();
+            List<int> moveRoiWhite = new();
+
+            // Add all possible ending index
+            for(int i=0; i<pieces.Length -1; i++)
+            {
+                Piece checkPieceMove = pieces[i];
+                for (int y = 0; y < pieces.Length -1; y++)
+                {
+                    if (checkPieceMove != null && (Char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
+                    {
+                        if (checkPieceMove.PlayMove(i, y))
+                        {
+                            if(checkPieceMove.Type == 'K')
+                            {
+                                moveRoiWhite.Add(y);
+                            } else
+                            {
+                                dangerZoneBlack.Add(y);
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < moveRoiWhite.Count; i++)
+            {
+                for (int j = 0; j < dangerZoneBlack.Count; j++)
+                {
+                    if (moveRoiWhite.ElementAt(i) == dangerZoneBlack.ElementAt(j))
+                    {
+                        moveRoiWhite.RemoveAt(i);
+                    }
+                }
+            }
+            Console.WriteLine("White");
+                for (int i = 0; i < moveRoiWhite.Count; i++)
+                {
+                    Console.Write(moveRoiWhite.ElementAt(i) + ", ");
+                }
+            Console.WriteLine("");
+            //return dangerZone;
+        }
+
+        private void /*bool*/ echecBlack()
+        {
+            List<int> dangerZoneWhite = new();
+            List<int> moveRoiBlack = new();
+
+            // Add all possible ending index
+            for (int i = 0; i < pieces.Length - 1; i++)
+            {
+                Piece checkPieceMove = pieces[i];
+                for (int y = 0; y < pieces.Length - 1; y++)
+                {
+                    if (checkPieceMove != null && (Char.IsUpper(checkPieceMove.Type) || checkPieceMove.Type == 'k'))
+                    {
+                        if (checkPieceMove.PlayMove(i, y))
+                        {
+                            if (checkPieceMove.Type == 'k')
+                            {
+                                moveRoiBlack.Add(y);
+                            }
+                            else
+                            {
+                                dangerZoneWhite.Add(y);
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < moveRoiBlack.Count; i++)
+            {
+                for (int j = 0; j < dangerZoneWhite.Count; j++)
+                {
+                    if (moveRoiBlack.ElementAt(i) == dangerZoneWhite.ElementAt(j))
+                    {
+                        moveRoiBlack.RemoveAt(i);
+                    }
+                }
+            }
+
+            Console.WriteLine("Black");
+            for (int i = 0; i < moveRoiBlack.Count; i++)
+            {
+                Console.Write(moveRoiBlack.ElementAt(i) + ", ");
+                //return dangerZone;
+            }
+            Console.WriteLine("");
         }
 
         private bool checkTurn(Piece piece)
