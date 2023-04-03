@@ -4,7 +4,7 @@ namespace Echec.model
 {
     public class Game
     {
-        public Board Board { get; set; }
+        private Board Board { get; set; }
         public List<Player> ListPlayers { get; set; }
         private List<string> listBoardConfig;
 

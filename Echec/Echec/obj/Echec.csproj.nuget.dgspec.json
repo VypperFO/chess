@@ -1,28 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ONE DRIVEW\\OneDrive - Cegep de Lanaudiere\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj": {}
+    "C:\\Users\\felix\\OneDrive\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj": {}
   },
   "projects": {
-    "D:\\ONE DRIVEW\\OneDrive - Cegep de Lanaudiere\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj": {
+    "C:\\Users\\felix\\OneDrive\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ONE DRIVEW\\OneDrive - Cegep de Lanaudiere\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj",
+        "projectUniqueName": "C:\\Users\\felix\\OneDrive\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj",
         "projectName": "Echec",
-        "projectPath": "D:\\ONE DRIVEW\\OneDrive - Cegep de Lanaudiere\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj",
-        "packagesPath": "C:\\Users\\charl\\.nuget\\packages\\",
-        "outputPath": "D:\\ONE DRIVEW\\OneDrive - Cegep de Lanaudiere\\Bureau\\chessFinal\\Echec\\Echec\\obj\\",
+        "projectPath": "C:\\Users\\felix\\OneDrive\\Bureau\\chessFinal\\Echec\\Echec\\Echec.csproj",
+        "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\felix\\OneDrive\\Bureau\\chessFinal\\Echec\\Echec\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\charl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\felix\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {

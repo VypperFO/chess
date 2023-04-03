@@ -7,6 +7,8 @@
         public int XDestination { get; set; }
         public int YDestination { get; set; }
 
+        public Coordinates() { }
+
         public Coordinates(int xStart, int yStart, int xDestination, int yDestination)
         {
             XStart = xStart;
