@@ -3,17 +3,17 @@ using System.Text;
 
 namespace Echec.model
 {
-    public class Plateau
+    public class Board
     {
         private Piece[]? pieces;
         private string whichTurn;
 
-        public Plateau()
+        public Board()
         {
             whichTurn = "w";
             initPieces();
         }
-        public string playMove(Coordonnée coords)
+        public string playMove(Coordinates coords)
         {
             int indexStart = getIndex(coords.XStart / 100, coords.YStart / 100);
             int indexEnd = getIndex(coords.XDestination / 100, coords.YDestination / 100);
@@ -51,19 +51,21 @@ namespace Echec.model
             if (whichTurn.Equals("w"))
             {
                 possibleMoves = echecBlack().Count;
-                if (possibleMoves == 0)
-                {
-                    return "WIN";
-                }
+                // ne marche pas car si ces propre piece le bloc il donne quand meme 0
+                //if (possibleMoves == 0)
+                //{
+                   // return "WIN";
+                //}
             }
 
             if (whichTurn.Equals("b"))
             {
                 possibleMoves = echecWhite().Count;
-                if (possibleMoves == 0)
-                {
-                    return "win";
-                }
+                // ne marche pas car si ces propre piece le bloc il donne quand meme 0
+                //if (possibleMoves == 0)
+                //{
+                    //return "win";
+                //}
             }
             return null;
         }
@@ -212,8 +214,7 @@ namespace Echec.model
 
         private void initPieces()
         {
-            //string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-            string fen = "k6p/7R/8/1Q6/8/8/8/K6P - 0 1";
+            string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
             pieces = new Piece[64];
             string[] fields = fen.Split(' ');
@@ -233,40 +234,40 @@ namespace Echec.model
                         switch (c)
                         {
                             case 'P':
-                                pieces[index] = new Pion(c, pieces);
+                                pieces[index] = new Pawn(c, pieces);
                                 break;
                             case 'N':
-                                pieces[index] = new Cavalier(c, pieces);
+                                pieces[index] = new Knight(c, pieces);
                                 break;
                             case 'B':
-                                pieces[index] = new Fou(c, pieces);
+                                pieces[index] = new Bishop(c, pieces);
                                 break;
                             case 'R':
-                                pieces[index] = new Tour(c, pieces);
+                                pieces[index] = new Rook(c, pieces);
                                 break;
                             case 'Q':
-                                pieces[index] = new Reine(c, pieces);
+                                pieces[index] = new Queen(c, pieces);
                                 break;
                             case 'K':
-                                pieces[index] = new Roi(c, pieces);
+                                pieces[index] = new King(c, pieces);
                                 break;
                             case 'p':
-                                pieces[index] = new Pion(c, pieces);
+                                pieces[index] = new Pawn(c, pieces);
                                 break;
                             case 'n':
-                                pieces[index] = new Cavalier(c, pieces);
+                                pieces[index] = new Knight(c, pieces);
                                 break;
                             case 'b':
-                                pieces[index] = new Fou(c, pieces);
+                                pieces[index] = new Bishop(c, pieces);
                                 break;
                             case 'r':
-                                pieces[index] = new Tour(c, pieces);
+                                pieces[index] = new Rook(c, pieces);
                                 break;
                             case 'q':
-                                pieces[index] = new Reine(c, pieces);
+                                pieces[index] = new Queen(c, pieces);
                                 break;
                             case 'k':
-                                pieces[index] = new Roi(c, pieces);
+                                pieces[index] = new King(c, pieces);
                                 break;
                         }
                         index++;

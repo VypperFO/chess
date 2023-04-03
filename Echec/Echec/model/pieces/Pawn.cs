@@ -1,10 +1,10 @@
 ﻿namespace Echec.model.pieces
 {
-    public class Pion : PieceSpecial
+    public class Pawn : SpecialPiece
     {
-        public Pion() { }
+        public Pawn() { }
 
-        public Pion(char type, Piece[] pieces, bool isMoved = false): base(type, pieces)
+        public Pawn(char type, Piece[] pieces, bool isMoved = false): base(type, pieces)
         {
             IsMoved = isMoved;
         }

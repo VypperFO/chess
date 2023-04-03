@@ -8,12 +8,12 @@ namespace Echec.view
     {
         private int clickCounter = 0;
         private Point start, end;
-        private Echec chess;
+        private Chess chess;
         private string[] pieces = new string[64];
 
         public int Id { get; set; }
 
-        public FormGame(Echec chess)
+        public FormGame(Chess chess)
         {
             this.chess = chess;
             InitializeComponent();
@@ -140,11 +140,12 @@ namespace Echec.view
             if (parts[1] == "w")
             {
                 labWhichTurn.Text = "Blanc";
-            } else if (parts[1] == "b")
+            }
+            else if (parts[1] == "b")
             {
                 labWhichTurn.Text = "Noir";
             }
-  
+
 
             GC.Collect();
         }
@@ -202,7 +203,7 @@ namespace Echec.view
             DialogResult result = MessageBox.Show(message, title, button);
             if (result == DialogResult.OK)
             {
-               Close();
+                Close();
             }
         }
 
@@ -216,6 +217,16 @@ namespace Echec.view
             {
                 Close();
             }
+        }
+
+        private void chessboard_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormGame_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

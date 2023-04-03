@@ -7,49 +7,55 @@ using System.Windows.Forms.VisualStyles;
 
 namespace Echec
 {
-    public class Echec
+    public class Chess
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        private List<Joueur> listAllPlayer = new();
-        private List<Partie> listGame = new();
+       
+        private List<Player> listAllPlayer = new();
+        private List<Game> listGame = new();
 
         static void Main()
         {
-            Echec chess = new();
+            Chess chess = new();
         }
 
-        public Echec()
+        public Chess()
         {
             ApplicationConfiguration.Initialize();
             FormMenu menu = new(this);
             Application.Run(menu);
         }
 
+        /// <summary>
+        /// Envoie les cordonnees du coup a la partie
+        /// </summary>
+        /// <param name="xStart">cordonnees de depart X du coup</param>
+        /// <param name="yStart">cordonnees de fin Y du coup</param>
+        /// <param name="xEnd">cordonnees de depart X du coup</param>
+        /// <param name="yEnd">cordonnees de fin Y du coup</param>
+        /// <param name="form">Form dans lequel les pieces sont bouger</param>
         public void PlayMove(int xStart, int yStart, int xEnd, int yEnd, FormGame form)
         {
-            Coordonnée coords = new Coordonnée(xStart, yStart, xEnd, yEnd);
-            Partie game = listGame.ElementAt(form.Id);
+            Coordinates coords = new Coordinates(xStart, yStart, xEnd, yEnd);
+            Game game = listGame.ElementAt(form.Id);
             string turnPlayed = game.PlayMove(coords);
             if (turnPlayed == "null")
             {
-               Joueur Player1 = game.ListPlayers.ElementAt(0);
-               Joueur Player2 = game.ListPlayers.ElementAt(1);
+               Player Player1 = game.ListPlayers.ElementAt(0);
+               Player Player2 = game.ListPlayers.ElementAt(1);
                 setNull(Player1.Name);
                 setNull(Player2.Name);
                 form.gameNull();
             } else if(turnPlayed == "win")
             {
-                Joueur Player1 = game.ListPlayers.ElementAt(0);
-                Joueur Player2 = game.ListPlayers.ElementAt(1);
+                Player Player1 = game.ListPlayers.ElementAt(0);
+                Player Player2 = game.ListPlayers.ElementAt(1);
                 setLoose(Player1.Name);
                 setWin(Player2.Name);
                 form.gameWon(Player2.Name);
             } else if(turnPlayed == "WIN")
             {
-                Joueur Player1 = game.ListPlayers.ElementAt(0);
-                Joueur Player2 = game.ListPlayers.ElementAt(1);
+                Player Player1 = game.ListPlayers.ElementAt(0);
+                Player Player2 = game.ListPlayers.ElementAt(1);
                 setWin(Player1.Name);
                 setLoose(Player2.Name);
                 form.gameWon(Player1.Name);
@@ -60,19 +66,21 @@ namespace Echec
 
         }
 
+        /// <summary>
+        /// Creer une nouvelle partie et place les pieces dans leur position de depart
+        /// </summary>
         public void NewGame()
         {
             int id;
             FormGame myForm = new(this);
-            Partie game = new();
+            Game game = new();
 
             listGame.Add(game);
 
             id = listGame.Count - 1;
             myForm.Id = id;
 
-            //myForm.ParseFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-            myForm.ParseFen("k6p/7R/8/1Q6/8/8/8/K6P - 0 1");
+            myForm.ParseFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
             myForm.Show();
         }
         public List<string> ReadStats()
@@ -91,7 +99,7 @@ namespace Echec
 
                 if (count == 5)
                 {
-                    Joueur player = new Joueur(strings.ElementAt(0), strings.ElementAt(1), strings.ElementAt(2), strings.ElementAt(3));
+                    Player player = new Player(strings.ElementAt(0), strings.ElementAt(1), strings.ElementAt(2), strings.ElementAt(3));
                     listAllPlayer.Add(player);
                     count = 0;
                     strings.Clear();
@@ -146,10 +154,10 @@ namespace Echec
             return false;
         }
 
-        public Joueur GetPlayer(string name)
+        public Player GetPlayer(string name)
         {
 
-            foreach (Joueur player in listAllPlayer)
+            foreach (Player player in listAllPlayer)
             {
                 if (player.Name == name)
                 {
@@ -161,9 +169,9 @@ namespace Echec
         
         public void sendPlayers(string playerOne, string playerTwo)
         {
-            Joueur player1 = GetPlayer(playerOne);
-            Joueur player2 = GetPlayer(playerTwo);
-            Partie game = listGame.ElementAt(listGame.Count - 1);
+            Player player1 = GetPlayer(playerOne);
+            Player player2 = GetPlayer(playerTwo);
+            Game game = listGame.ElementAt(listGame.Count - 1);
             game.addPlayerToGame(player1,player2);
         }
 

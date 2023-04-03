@@ -1,11 +1,12 @@
-﻿using static System.Windows.Forms.AxHost;
-
-namespace Echec.model.pieces
+﻿namespace Echec.model.pieces
 {
-    public class Fou : Piece
+    public class Rook : SpecialPiece
     {
-        public Fou() { }
-        public Fou(char type, Piece[] pieces): base(type, pieces) { }
+
+        public Rook() { }
+        public Rook(char type, Piece[] pieces, bool isMoved = false): base(type, pieces, isMoved)
+        {
+        }
 
         public override bool PlayMove(int startIndex, int endIndex)
         {
@@ -14,7 +15,7 @@ namespace Echec.model.pieces
             int endX = endIndex % 8;
             int endY = endIndex / 8;
 
-            if (Math.Abs(startX - endX) != Math.Abs(startY - endY) || (startIndex == endIndex))
+            if (startX != endX && startY != endY)
             {
                 return false;
             }
@@ -28,15 +29,15 @@ namespace Echec.model.pieces
             int yDir = Math.Sign(endY - startY);
             int x = startX + xDir;
             int y = startY + yDir;
-            while (x != endX && y != endY)
+            while (x != endX || y != endY)
             {
                 int position = y * 8 + x;
                 if (Pieces[position] != null)
                 {
                     return false;
                 }
-                x += xDir;
-                y += yDir;
+                x += xDir * (startY == endY ? 1 : 0);
+                y += yDir * (startX == endX ? 1 : 0);
             }
 
             return true;

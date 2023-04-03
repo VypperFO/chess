@@ -1,9 +1,9 @@
 ﻿namespace Echec.model.pieces
 {
-    public class Roi : PieceSpecial
+    public class King : SpecialPiece
     {
-        public Roi() { }
-        public Roi(char type, Piece[] pieces,bool isMoved = false): base(type, pieces, isMoved) { }
+        public King() { }
+        public King(char type, Piece[] pieces,bool isMoved = false): base(type, pieces, isMoved) { }
         public override bool PlayMove(int startIndex, int endIndex)
         {
             int startX = startIndex % 8;

@@ -1,9 +1,9 @@
 ﻿namespace Echec.model.pieces
 {
-    public class Cavalier : Piece
+    public class Knight : Piece
     {
-        public Cavalier() { }
-        public Cavalier(char type, Piece[] pieces): base(type, pieces)
+        public Knight() { }
+        public Knight(char type, Piece[] pieces): base(type, pieces)
         {
         }
 

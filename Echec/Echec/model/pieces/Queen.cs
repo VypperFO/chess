@@ -1,14 +1,14 @@
 ﻿namespace Echec.model.pieces
 {
-    public class Reine : Piece
+    public class Queen : Piece
     {
-        public Reine() { }
-        public Reine(char type, Piece[] pieces): base(type, pieces) { }
+        public Queen() { }
+        public Queen(char type, Piece[] pieces): base(type, pieces) { }
 
         public override bool PlayMove(int startIndex, int endIndex)
         {
-            Tour tower = new Tour(Type, Pieces);
-            Fou bishop = new Fou(Type, Pieces);
+            Rook tower = new Rook(Type, Pieces);
+            Bishop bishop = new Bishop(Type, Pieces);
            if (tower.PlayMove(startIndex, endIndex) || bishop.PlayMove(startIndex, endIndex) ){
                 return true;
             }

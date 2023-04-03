@@ -2,9 +2,9 @@
 {
     public partial class FormMenu : Form
     {
-        private Echec chess;
+        private Chess chess;
         private int nbPlayer;
-        public FormMenu(Echec chess)
+        public FormMenu(Chess chess)
         {
 
             this.chess = chess;

@@ -1,14 +1,14 @@
 ﻿namespace Echec.model
 {
-    public class Joueur
+    public class Player
     {
         private string name;
         private string nbNull;
         private string nbVictory;
         private string nbDefeat;
 
-        public Joueur() { }
-        public Joueur(string name, string nbVictory, string nbDefeat, string nbNull)
+        public Player() { }
+        public Player(string name, string nbVictory, string nbDefeat, string nbNull)
         {
             this.name = name;
             this.nbVictory = nbVictory;

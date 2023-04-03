@@ -2,21 +2,21 @@
 
 namespace Echec.model
 {
-    public class Partie
+    public class Game
     {
-        public Plateau Board { get; set; }
-        public List<Joueur> ListPlayers { get; set; }
+        public Board Board { get; set; }
+        public List<Player> ListPlayers { get; set; }
         private List<string> listBoardConfig;
 
-        public Partie()
+        public Game()
         {
-            Board = new Plateau();
-            ListPlayers = new List<Joueur>();
+            Board = new Board();
+            ListPlayers = new List<Player>();
             listBoardConfig = new List<string>();
             listBoardConfig.Add(Board.ToString());
         }
 
-        public string PlayMove(Coordonnée coords)
+        public string PlayMove(Coordinates coords)
         {
             string boardMoved = Board.playMove(coords);
 
@@ -34,7 +34,7 @@ namespace Echec.model
             return listBoardConfig.ElementAt(listBoardConfig.Count -1);
         }
 
-        public void addPlayerToGame(Joueur player1, Joueur player2)
+        public void addPlayerToGame(Player player1, Player player2)
         {
            ListPlayers.Add(player1);
            ListPlayers.Add(player2);

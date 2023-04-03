@@ -28,86 +28,79 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.chessboard = new System.Windows.Forms.PictureBox();
-            this.labWhichTurn = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.chessboard)).BeginInit();
-            this.SuspendLayout();
+            chessboard = new PictureBox();
+            labWhichTurn = new Label();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            ((System.ComponentModel.ISupportInitialize)chessboard).BeginInit();
+            SuspendLayout();
             // 
             // chessboard
             // 
-            this.chessboard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.chessboard.Image = global::Echec.Properties.Resources.chessboard;
-            this.chessboard.Location = new System.Drawing.Point(18, 20);
-            this.chessboard.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.chessboard.MaximumSize = new System.Drawing.Size(800, 800);
-            this.chessboard.MinimumSize = new System.Drawing.Size(800, 800);
-            this.chessboard.Name = "chessboard";
-            this.chessboard.Size = new System.Drawing.Size(800, 800);
-            this.chessboard.TabIndex = 0;
-            this.chessboard.TabStop = false;
-            this.chessboard.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chessboard_MouseDown);
+            chessboard.BackgroundImageLayout = ImageLayout.Center;
+            chessboard.Image = Properties.Resources.chessboard;
+            chessboard.Location = new Point(13, 12);
+            chessboard.Name = "chessboard";
+            chessboard.Size = new Size(800, 800);
+            chessboard.TabIndex = 0;
+            chessboard.TabStop = false;
+            chessboard.Click += chessboard_Click;
+            chessboard.MouseDown += chessboard_MouseDown;
             // 
             // labWhichTurn
             // 
-            this.labWhichTurn.AutoSize = true;
-            this.labWhichTurn.Location = new System.Drawing.Point(1186, 41);
-            this.labWhichTurn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labWhichTurn.Name = "labWhichTurn";
-            this.labWhichTurn.Size = new System.Drawing.Size(53, 25);
-            this.labWhichTurn.TabIndex = 1;
-            this.labWhichTurn.Text = "Blanc";
+            labWhichTurn.AutoSize = true;
+            labWhichTurn.Location = new Point(830, 25);
+            labWhichTurn.Name = "labWhichTurn";
+            labWhichTurn.Size = new Size(36, 15);
+            labWhichTurn.TabIndex = 1;
+            labWhichTurn.Text = "Blanc";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1186, 94);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 25);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Blanc";
+            label1.AutoSize = true;
+            label1.Location = new Point(830, 56);
+            label1.Name = "label1";
+            label1.Size = new Size(36, 15);
+            label1.TabIndex = 2;
+            label1.Text = "Blanc";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1186, 149);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 25);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Blanc";
+            label2.AutoSize = true;
+            label2.Location = new Point(830, 89);
+            label2.Name = "label2";
+            label2.Size = new Size(36, 15);
+            label2.TabIndex = 3;
+            label2.Text = "Blanc";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1125, 41);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 25);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Tour :";
+            label3.AutoSize = true;
+            label3.Location = new Point(788, 25);
+            label3.Name = "label3";
+            label3.Size = new Size(36, 15);
+            label3.TabIndex = 4;
+            label3.Text = "Tour :";
             // 
             // FormGame
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1406, 1319);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.labWhichTurn);
-            this.Controls.Add(this.chessboard);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "FormGame";
-            this.Text = "Game";
-            ((System.ComponentModel.ISupportInitialize)(this.chessboard)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(984, 961);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(labWhichTurn);
+            Controls.Add(chessboard);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Name = "FormGame";
+            Text = "Game";
+            Load += FormGame_Load;
+            ((System.ComponentModel.ISupportInitialize)chessboard).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
