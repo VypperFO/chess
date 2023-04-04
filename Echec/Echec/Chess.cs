@@ -1,5 +1,6 @@
 using ChessGame.view;
 using ChessGame.model;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ChessGame
 {
@@ -42,24 +43,24 @@ namespace ChessGame
                 {
                     Player Player1 = game.ListPlayers.ElementAt(0);
                     Player Player2 = game.ListPlayers.ElementAt(1);
-                    setNull(Player1.Name);
-                    setNull(Player2.Name);
+                    SetNull(Player1.Name);
+                    SetNull(Player2.Name);
                     form.gameNull();
                 }
                 else if (turnPlayed == "win")
                 {
                     Player Player1 = game.ListPlayers.ElementAt(0);
                     Player Player2 = game.ListPlayers.ElementAt(1);
-                    setLoose(Player1.Name);
-                    setWin(Player2.Name);
+                    SetLose(Player1.Name);
+                    SetWin(Player2.Name);
                     form.gameWon(Player2.Name);
                 }
                 else if (turnPlayed == "WIN")
                 {
                     Player Player1 = game.ListPlayers.ElementAt(0);
                     Player Player2 = game.ListPlayers.ElementAt(1);
-                    setWin(Player1.Name);
-                    setLoose(Player2.Name);
+                    SetWin(Player1.Name);
+                    SetLose(Player2.Name);
                     form.gameWon(Player1.Name);
                 }
                 else
@@ -200,19 +201,19 @@ namespace ChessGame
         /// </summary>
         /// <param name="playerOne">Joueur 1</param>
         /// <param name="playerTwo">Joueur 2</param>
-        public void sendPlayers(string playerOne, string playerTwo)
+        public void SendPlayers(string playerOne, string playerTwo)
         {
             Player player1 = GetPlayer(playerOne);
             Player player2 = GetPlayer(playerTwo);
             Game game = listGame.ElementAt(listGame.Count - 1);
-            game.addPlayerToGame(player1, player2);
+            game.AddPlayerToGame(player1, player2);
         }
 
         /// <summary>
         /// Rajouter une null au statistique d'un joueur
         /// </summary>
         /// <param name="name">nom du joueur</param>
-        public void setNull(string name)
+        public void SetNull(string name)
         {
             string path = "statistique.txt";
             int index = 0;
@@ -236,7 +237,7 @@ namespace ChessGame
         /// Rajouter une partie gagner au statistique d'un joueur
         /// </summary>
         /// <param name="name">nom du joueur</param>
-        public void setWin(string name)
+        public void SetWin(string name)
         {
             string path = "statistique.txt";
             int index = 0;
@@ -260,7 +261,7 @@ namespace ChessGame
         /// Rajouter une partie perdu au statistique d'un joueur
         /// </summary>
         /// <param name="name">nom du joueur</param>
-        public void setLoose(string name)
+        public void SetLose(string name)
         {
             string path = "statistique.txt";
             int index = 0;
@@ -280,5 +281,17 @@ namespace ChessGame
             File.WriteAllLines(path, arrLine);
         }
 
+        /// <summary>
+        /// Met la partie en nulle
+        /// </summary>
+        /// <param name="id">Id du form</param>
+        public void SetGameNull(int id)
+        {
+            Game game = listGame.ElementAt(id);
+            Player Player1 = game.ListPlayers.ElementAt(0);
+            Player Player2 = game.ListPlayers.ElementAt(1);
+            SetNull(Player1.Name);
+            SetNull(Player2.Name);
+        }
     }
 }

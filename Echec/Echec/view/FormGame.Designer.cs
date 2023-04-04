@@ -33,6 +33,7 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)chessboard).BeginInit();
             SuspendLayout();
             // 
@@ -83,11 +84,22 @@
             label3.TabIndex = 4;
             label3.Text = "Tour :";
             // 
+            // button1
+            // 
+            button1.Location = new Point(830, 573);
+            button1.Name = "button1";
+            button1.Size = new Size(126, 49);
+            button1.TabIndex = 5;
+            button1.Text = "Demander Null";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // FormGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(984, 961);
+            Controls.Add(button1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -108,5 +120,6 @@
         private Label label1;
         private Label label2;
         private Label label3;
+        private Button button1;
     }
 }

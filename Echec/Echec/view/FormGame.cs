@@ -1,4 +1,6 @@
 ﻿using ChessGame.Properties;
+using System.Security.Cryptography;
+using System.Windows.Forms;
 
 namespace ChessGame.view
 {
@@ -38,7 +40,7 @@ namespace ChessGame.view
                 }
 
                 label2.Visible = false;
-                label1.Text = start.ToString();
+                label1.Text = "Start: " + (start.X / 100 + 1).ToString() + ", " + (start.Y / 100 + 1).ToString();
             }
 
             if (clickCounter == 2)
@@ -48,7 +50,7 @@ namespace ChessGame.view
                 end = coordinates2;
 
                 label2.Visible = true;
-                label2.Text = end.ToString();
+                label2.Text = "End: " + (end.X / 100 + 1).ToString() + ", " + (end.Y / 100 + 1).ToString();
 
                 PlayMove(start.X, start.Y, end.X, end.Y);
 
@@ -254,5 +256,24 @@ namespace ChessGame.view
             }
         }
 
+        /// <summary>
+        /// Demande au joueur si il veut terminer la partie en null
+        /// </summary>
+        /// <param name="sender">qui clicke</param>
+        /// <param name="e">Event</param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Voulez vous finir la partie en Null ?",
+                      "Demande de Null", MessageBoxButtons.YesNo);
+            switch (dr)
+            {
+                case DialogResult.Yes:
+                    Close();
+                    chess.SetGameNull(this.Id);
+                    break;
+                case DialogResult.No:
+                    break;
+            }
+        }
     }
 }

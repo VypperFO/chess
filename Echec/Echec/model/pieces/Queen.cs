@@ -22,11 +22,11 @@
             return false;
         }
 
-        public override bool PlayMove2(int startIndex, int endIndex, Piece[] TempPieces)
+        public override bool PlayMoveTemp(int startIndex, int endIndex, Piece[] TempPieces)
         {
             Rook tower = new Rook(Type, Pieces);
             Bishop bishop = new Bishop(Type, Pieces);
-            if (tower.PlayMove2(startIndex, endIndex,TempPieces) || bishop.PlayMove2(startIndex, endIndex, TempPieces))
+            if (tower.PlayMoveTemp(startIndex, endIndex,TempPieces) || bishop.PlayMoveTemp(startIndex, endIndex, TempPieces))
             {
                 return true;
             }

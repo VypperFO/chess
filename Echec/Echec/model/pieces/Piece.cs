@@ -15,9 +15,7 @@
 
         public virtual bool PlayMove(int startIndex, int endIndex) { return false; }
 
-        public virtual bool PlayMove2(int startIndex, int endIndex, Piece[] TempPieces) { return false; }
-
-        public virtual bool testMoves(int startIndex, int endIndex) { return false; }
+        public virtual bool PlayMoveTemp(int startIndex, int endIndex, Piece[] TempPieces) { return false; }
 
         /// <summary>
         /// Verifie si la destination d'une piece conient une piece de la meme couleur que la piece qui fait le mouvement
@@ -46,7 +44,13 @@
             return false;
         }
 
-        public bool SameColor2(int endIndex, Piece[] TempPieces)
+        /// <summary>
+        /// Verifie si la destination d'une piece conient une piece de la meme couleur que la piece qui fait le mouvement
+        /// </summary>
+        /// <param name="endIndex">la destination de la piece</param>
+        /// <param name="TempPieces"></param>
+        /// <returns>si la destination d'une piece conient une piece de la meme couleur</returns>
+        public bool SameColorTemp(int endIndex, Piece[] TempPieces)
         {
             if (TempPieces[endIndex] == null)
             {

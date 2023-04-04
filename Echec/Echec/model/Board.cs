@@ -59,107 +59,155 @@ namespace ChessGame.model
         /// <returns>Si la partie est terminer et si oui par qui</returns>
         private string isChecked()
         {
-            int possibleMoves1;
-            int possibleMoves2;
-            possibleMoves2 = EchecWhite().Count;
-            Console.WriteLine(possibleMoves2);
-            Console.WriteLine(IsInIndirectDangerWhite().Count);
-            if(whichTurn == "w")
+            int possibleMovesBlack;
+            possibleMovesBlack = EchecBlack().Count;
+            if (possibleMovesBlack == 0 && IsInDangerBlackTemp())
             {
-                if (possibleMoves2 > 0 && IsInDirectDangerWhite())
+                return "WIN";
+            }
+            else if (whichTurn == "b")
+            {
+
+                if (possibleMovesBlack > 0 && IsinDangerBlack())
+                {
+                    if (!IsInDangerBlackTemp())
+                    {
+                        return null;
+                    }
+
+                    return "echec";
+                }
+                if (possibleMovesBlack == 0 && IsInDangerWhiteTemp())
+                {
+                    return "WIN";
+                }
+
+                return null;
+            }
+
+            int possibleMovesWhite;
+            possibleMovesWhite = EchecWhite().Count;
+            if (possibleMovesWhite == 0 && IsInDangerWhiteTemp())
+            {
+                return "win";
+            }
+            else if (whichTurn == "w")
+            {
+
+                if (possibleMovesWhite > 0 && IsInDangerWhite())
                 {
                     if (!IsInDangerWhiteTemp())
                     {
                         return null;
                     }
-  
+
                     return "echec";
                 }
-                else if (possibleMoves2 == 0 && IsInDirectDangerWhite() && IsInDirectDangerWhite2().Count == 0)
+                if (possibleMovesWhite == 0 && IsInDangerWhiteTemp())
                 {
-
                     return "win";
-
                 }
-                else if (possibleMoves2 == 0 && !IsInDirectDangerWhite() && IsInIndirectDangerWhite().Count > 0)
-                {
-                    //return "win";
 
-                } else if (!IsInDangerWhiteTemp() && possibleMoves2 == 0)
-                {
-                    return null;
-                }
                 return null;
             }
-             return null;
+            return null;
         }
 
-        public List<int> IsInDirectDangerWhite2()
+        /// <summary>
+        /// Determine si le roi noire est en danger 
+        /// </summary>
+        /// <returns>si le roi est en danger</returns>
+        public bool IsinDangerBlack()
         {
-                List<int> dangerZoneBlack = new();
-                List<int> moveRoiWhite = new();
-
-                for (int i = 0; i < TempPieces.Length - 1; i++)
-                {
-                    Piece checkPieceMove = TempPieces[i];
-                    for (int y = 0; y < TempPieces.Length - 1; y++)
-                    {
-                        if (checkPieceMove != null && (char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
-                        {
-                            if (checkPieceMove.testMoves(i, y))
-                            {
-                                if (checkPieceMove.Type == 'K')
-                                {
-                                    moveRoiWhite.Add(y);
-                                }
-                                else
-                                {
-                                    dangerZoneBlack.Add(y);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                for (int i = 0; i < dangerZoneBlack.Count; i++)
-                {
-                    for (int j = 0; j < moveRoiWhite.Count; j++)
-                    {
-                        if (moveRoiWhite.ElementAt(j) == dangerZoneBlack.ElementAt(i))
-                        {
-                            moveRoiWhite.RemoveAt(j);
-                        }
-                    }
-                }
-                return moveRoiWhite;
-        }
-
-
-        public List<int> IsInIndirectDangerWhite()
-        {
+            List<int> dangerZoneBlack = new();
             List<int> moveRoiWhite = new();
+
             for (int i = 0; i < pieces.Length - 1; i++)
             {
                 Piece checkPieceMove = pieces[i];
                 for (int y = 0; y < pieces.Length - 1; y++)
                 {
-                    if (checkPieceMove != null && (char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
+                    if (checkPieceMove != null && (char.IsUpper(checkPieceMove.Type) || checkPieceMove.Type == 'k'))
                     {
-                        if (checkPieceMove.testMoves(i, y))
+                        if (checkPieceMove.PlayMove(i, y))
                         {
-                            if (checkPieceMove.Type == 'K')
+                            if (checkPieceMove.Type == 'k')
                             {
                                 moveRoiWhite.Add(i);
                             }
-                          
+                            else
+                            {
+                                dangerZoneBlack.Add(y);
+                            }
                         }
                     }
                 }
             }
-            return moveRoiWhite;
+
+            for (int i = 0; i < moveRoiWhite.Count; i++)
+            {
+                for (int j = 0; j < dangerZoneBlack.Count; j++)
+                {
+                    if (moveRoiWhite.ElementAt(i) == dangerZoneBlack.ElementAt(j))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
-        public bool IsInDirectDangerWhite()
+        /// <summary>
+        /// Determine si le roi noire est en danger dans le tableau temporaire
+        /// </summary>
+        /// <returns>si il est en danger</returns>
+        public bool IsInDangerBlackTemp()
+        {
+            List<int> dangerZoneBlack = new();
+            List<int> moveRoiWhite = new();
+
+            for (int i = 0; i < TempPieces.Length - 1; i++)
+            {
+                Piece checkPieceMove = TempPieces[i];
+                for (int y = 0; y < TempPieces.Length - 1; y++)
+                {
+                    if (checkPieceMove != null && (char.IsUpper(checkPieceMove.Type) || checkPieceMove.Type == 'k'))
+                    {
+                        if (checkPieceMove.PlayMoveTemp(i, y, TempPieces))
+                        {
+                            if (checkPieceMove.Type == 'k')
+                            {
+                                moveRoiWhite.Add(i);
+                            }
+                            else
+                            {
+                                dangerZoneBlack.Add(y);
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < moveRoiWhite.Count; i++)
+            {
+                for (int j = 0; j < dangerZoneBlack.Count; j++)
+                {
+                    if (moveRoiWhite.ElementAt(i) == dangerZoneBlack.ElementAt(j))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Determine si le roi blanc est en danger 
+        /// </summary>
+        /// <returns>si le roi est en danger</returns>
+        public bool IsInDangerWhite()
         {
             List<int> dangerZoneBlack = new();
             List<int> moveRoiWhite = new();
@@ -200,7 +248,10 @@ namespace ChessGame.model
             return false;
         }
 
-
+        /// <summary>
+        /// Determine si le roi blanc est en danger dans le tableau temporaire
+        /// </summary>
+        /// <returns>si le roi est en danger</returns>
         public bool IsInDangerWhiteTemp()
         {
             List<int> dangerZoneBlack = new();
@@ -213,7 +264,7 @@ namespace ChessGame.model
                 {
                     if (checkPieceMove != null && (char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
                     {
-                        if (checkPieceMove.PlayMove2(i, y, TempPieces))
+                        if (checkPieceMove.PlayMoveTemp(i, y, TempPieces))
                         {
                             if (checkPieceMove.Type == 'K')
                             {
@@ -258,7 +309,7 @@ namespace ChessGame.model
                 {
                     if (checkPieceMove != null && (char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
                     {
-                        if (checkPieceMove.PlayMove2(i, y, TempPieces))
+                        if (checkPieceMove.PlayMoveTemp(i, y, TempPieces))
                         {
                             if (checkPieceMove.Type == 'K')
                             {
@@ -303,7 +354,7 @@ namespace ChessGame.model
                 {
                     if (checkPieceMove != null && (char.IsUpper(checkPieceMove.Type) || checkPieceMove.Type == 'k'))
                     {
-                        if (checkPieceMove.PlayMove2(i, y, TempPieces))
+                        if (checkPieceMove.PlayMoveTemp(i, y, TempPieces))
                         {
                             if (checkPieceMove.Type == 'k')
                             {
@@ -401,7 +452,7 @@ namespace ChessGame.model
         private void InitPieces()
         {
             string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-          
+
 
             pieces = new Piece[64];
             string[] fields = fen.Split(' ');

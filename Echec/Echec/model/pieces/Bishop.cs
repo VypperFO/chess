@@ -46,7 +46,14 @@
             return true;
         }
 
-        public override bool PlayMove2(int startIndex, int endIndex, Piece[] TempPieces)
+        /// <summary>
+        /// Verifie si la piece pour faire le deplacement donner en parametre dans un tableau temporaire
+        /// </summary>
+        /// <param name="startIndex">Coordonnes de depart du mouvement de la piece</param>
+        /// <param name="endIndex">Coordonnes de fin du mouvement de la piece</param>
+        /// <param name="TempPieces">tableau temporaire</param>
+        /// <returns>Si la piece a le droit de faire se deplacement</returns>
+        public override bool PlayMoveTemp(int startIndex, int endIndex, Piece[] TempPieces)
         {
             int startX = startIndex % 8;
             int startY = startIndex / 8;
@@ -58,7 +65,7 @@
                 return false;
             }
 
-            if (SameColor2(endIndex,TempPieces))
+            if (SameColorTemp(endIndex,TempPieces))
             {
                 return false;
             }

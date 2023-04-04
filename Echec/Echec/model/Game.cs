@@ -44,7 +44,7 @@
         /// </summary>
         /// <param name="player1">Joueur 1 de la partie</param>
         /// <param name="player2">Joueur 2 de la partie</param>
-        public void addPlayerToGame(Player player1, Player player2)
+        public void AddPlayerToGame(Player player1, Player player2)
         {
             ListPlayers.Add(player1);
             ListPlayers.Add(player2);

@@ -26,11 +26,12 @@
         /// <param name="e">Event</param>
         private void btnNewGame_Click(object sender, EventArgs e)
         {
-            if (!(label7.Text == "" && label8.Text == ""))
-            {
-                chess.NewGame();
-                chess.sendPlayers(label7.Text, label8.Text);
-            }
+            if (!(label7.Text == "" ))
+                if(!(label8.Text == ""))
+                {
+                    chess.NewGame();
+                    chess.SendPlayers(label7.Text, label8.Text);
+                }
         }
 
         /// <summary>
