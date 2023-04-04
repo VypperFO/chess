@@ -1,28 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ONE DRIVEW\\OneDrive - Cegep de Lanaudiere\\Bureau\\chessFinal\\Echec\\Echec\\ChessGame.csproj": {}
+    "C:\\Users\\felix\\Desktop\\chessFinal\\Echec\\Echec\\ChessGame.csproj": {}
   },
   "projects": {
-    "D:\\ONE DRIVEW\\OneDrive - Cegep de Lanaudiere\\Bureau\\chessFinal\\Echec\\Echec\\ChessGame.csproj": {
+    "C:\\Users\\felix\\Desktop\\chessFinal\\Echec\\Echec\\ChessGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ONE DRIVEW\\OneDrive - Cegep de Lanaudiere\\Bureau\\chessFinal\\Echec\\Echec\\ChessGame.csproj",
+        "projectUniqueName": "C:\\Users\\felix\\Desktop\\chessFinal\\Echec\\Echec\\ChessGame.csproj",
         "projectName": "ChessGame",
-        "projectPath": "D:\\ONE DRIVEW\\OneDrive - Cegep de Lanaudiere\\Bureau\\chessFinal\\Echec\\Echec\\ChessGame.csproj",
-        "packagesPath": "C:\\Users\\charl\\.nuget\\packages\\",
-        "outputPath": "D:\\ONE DRIVEW\\OneDrive - Cegep de Lanaudiere\\Bureau\\chessFinal\\Echec\\Echec\\obj\\",
+        "projectPath": "C:\\Users\\felix\\Desktop\\chessFinal\\Echec\\Echec\\ChessGame.csproj",
+        "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\felix\\Desktop\\chessFinal\\Echec\\Echec\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\charl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\felix\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
@@ -58,7 +57,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

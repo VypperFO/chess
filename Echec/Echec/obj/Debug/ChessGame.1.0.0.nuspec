@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>ChessGame</id>
+    <version>1.0.0</version>
+    <authors>ChessGame</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0-windows7.0" />
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="C:\Users\felix\Desktop\chessFinal\Echec\Echec\bin\Debug\net6.0-windows\ChessGame.runtimeconfig.json" target="lib\net6.0-windows7.0\ChessGame.runtimeconfig.json" />
+    <file src="C:\Users\felix\Desktop\chessFinal\Echec\Echec\bin\Debug\net6.0-windows\ChessGame.dll" target="lib\net6.0-windows7.0\ChessGame.dll" />
+  </files>
+</package>
