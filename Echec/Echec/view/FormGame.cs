@@ -1,17 +1,15 @@
-﻿using Echec.Properties;
-using System.Drawing;
-using System.Runtime.CompilerServices;
+﻿using ChessGame.Properties;
 
-namespace Echec.view
+namespace ChessGame.view
 {
     public partial class FormGame : Form
     {
-        private int clickCounter = 0;
-        private Point start, end;
-        private Chess chess;
-        private string[] pieces = new string[64];
+        private int clickCounter = 0; // counteur de click de la vue
+        private Point start, end; // cordonne des click
+        private Chess chess; // controlleur de la partie 
+        private string[] pieces = new string[64]; // tableau contenant les piece de la partie
 
-        public int Id { get; set; }
+        public int Id { get; set; } // id du form de la partie
 
         public FormGame(Chess chess)
         {
@@ -19,6 +17,10 @@ namespace Echec.view
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Calcule les cordonnes des click fait par l'utilisateur et envoie au controlleur de jouer un coup avec les cordoones.
+        /// </summary>
+        /// <param name="e">Event listener</param>
         private void ClickSelection(EventArgs e)
         {
             clickCounter++;
@@ -54,12 +56,22 @@ namespace Echec.view
             }
         }
 
+        /// <summary>
+        ///  Envoie les coordonne du mouvement au controlleur
+        /// </summary>
+        /// <param name="xStart">cordonnees de depart X du coup</param>
+        /// <param name="yStart">cordonnees de depart Y du coup</param>
+        /// <param name="xEnd">cordonnees de fin X du coup</param>
+        /// <param name="yEnd">cordonnees de fin Y du coup</param>
         private void PlayMove(int xStart, int yStart, int xEnd, int yEnd)
         {
             chess.PlayMove(xStart, yStart, xEnd, yEnd, this);
         }
 
-
+        /// <summary>
+        /// Transforme le string en piece dans le form
+        /// </summary>
+        /// <param name="fen">string du contenu du plateau formater en FEN</param>
         public void ParseFen(string fen)
         {
             ClearBoard();
@@ -150,6 +162,13 @@ namespace Echec.view
             GC.Collect();
         }
 
+        /// <summary>
+        /// Dessine les piece dans le Form
+        /// </summary>
+        /// <param name="x">Coordones X de la piece</param>
+        /// <param name="y">Coordones Y de la piece</param>
+        /// <param name="imageName">Bitmap de la piece</param>
+        /// <param name="bmp">contient un image de la piece</param>
         private void DrawPiece(int x, int y, Bitmap imageName, Bitmap bmp)
         {
             Pen pen = new(Color.Black, -5);
@@ -158,27 +177,30 @@ namespace Echec.view
             g.Dispose();
         }
 
-        private static void DrawSquare(int x, int y, Bitmap bmp)
-        {
-            Pen pen = new(Color.White, 2);
-            Graphics formGraphics;
-            formGraphics = Graphics.FromImage(bmp);
-            formGraphics.DrawRectangle(pen, new Rectangle(500, 500, 100, 100));
-            pen.Dispose();
-            formGraphics.Dispose();
-        }
-
+        /// <summary>
+        /// Vide le board de la partie
+        /// </summary>
         private void ClearBoard()
         {
             chessboard.Image.Dispose();
             chessboard.Image = Resources.chessboard;
         }
 
+        /// <summary>
+        /// Event listener qui ecoute quand un click est fait
+        /// </summary>
+        /// <param name="sender">Qui a fait le click</param>
+        /// <param name="e">Event</param>
         private void chessboard_MouseDown(object sender, MouseEventArgs e)
         {
             ClickSelection(e);
         }
 
+        /// <summary>
+        /// Regarde si un index du tableau pieces est vide
+        /// </summary>
+        /// <param name="coords">index dans le tableau</param>
+        /// <returns>si le tableau est vide ou non a cette index</returns>
         private bool IsEmpty(Point coords)
         {
             int index = GetIndex(coords.X / 100, coords.Y / 100);
@@ -190,11 +212,21 @@ namespace Echec.view
             return false;
         }
 
+        /// <summary>
+        /// Calcule l'index d'une piece dans un tableau, a l'aide de ces cordonée sur le plateau
+        /// </summary>
+        /// <param name="x">Coordonnes X de la piece</param>
+        /// <param name="y">Coordonnes Y de la piece</param>
+        /// <returns> l'index d'une piece dans un tableau</returns>
         private int GetIndex(int x, int y)
         {
             return y * 8 + x;
         }
 
+        /// <summary>
+        /// Confirme au joueurs qui a gagner la partie
+        /// </summary>
+        /// <param name="joueur1">nom du joueur qui a gagner la partie</param>
         public void gameWon(string joueur1)
         {
             string message = joueur1 + " a gagner la partie";
@@ -207,6 +239,9 @@ namespace Echec.view
             }
         }
 
+        /// <summary>
+        /// Confirme au joueurs que la partie a terminer en Null
+        /// </summary>
         public void gameNull()
         {
             string message = "La partie est null";
@@ -219,14 +254,5 @@ namespace Echec.view
             }
         }
 
-        private void chessboard_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormGame_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

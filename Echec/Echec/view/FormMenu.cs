@@ -1,12 +1,11 @@
-﻿namespace Echec.view
+﻿namespace ChessGame.view
 {
     public partial class FormMenu : Form
     {
-        private Chess chess;
-        private int nbPlayer;
+        private Chess chess; // controlleur de la partie 
+        private int nbPlayer; // nombre de joueur selectionner pour la partie
         public FormMenu(Chess chess)
         {
-
             this.chess = chess;
             InitializeComponent();
             label7.Text = "";
@@ -20,6 +19,11 @@
 
         }
 
+        /// <summary>
+        /// Event listener sur le boutton pour commencer une nouvelle partie, verifie qu'il y a 2 joueurs de selectionner pour la partie
+        /// </summary>
+        /// <param name="sender">qui a clicker</param>
+        /// <param name="e">Event</param>
         private void btnNewGame_Click(object sender, EventArgs e)
         {
             if (!(label7.Text == "" && label8.Text == ""))
@@ -29,6 +33,11 @@
             }
         }
 
+        /// <summary>
+        /// Event listener sur le boutton pour creer un nouveaux joueur
+        /// </summary>
+        /// <param name="sender">qui a clicker</param>
+        /// <param name="e">Event</param>
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.TextLength > 0)
@@ -45,6 +54,11 @@
             }
         }
 
+        /// <summary>
+        /// update les statistique qui sont afficher pour ceu du joueur selectioner
+        /// </summary>
+        /// <param name="sender">qui a clicker</param>
+        /// <param name="e">Event</param>
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<string> list = chess.ReadStats();
@@ -71,6 +85,11 @@
         }
 
 
+        /// <summary>
+        /// ajoute le joueur qui est selectionner dans la partie
+        /// </summary>
+        /// <param name="sender">qui a clicker</param>
+        /// <param name="e">Event</param>
         private void button2_Click(object sender, EventArgs e)
         {
             string text = listBox1.Text;
@@ -88,6 +107,11 @@
 
         }
 
+        /// <summary>
+        /// Enleve 1 des joueur qui est selectionner pour la partie
+        /// </summary>
+        /// <param name="sender">qui a clicker</param>
+        /// <param name="e">Event</param>
         private void button3_Click(object sender, EventArgs e)
         {
             if (listBox1.Text == label7.Text)

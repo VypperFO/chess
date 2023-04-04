@@ -1,26 +1,38 @@
-﻿using Echec.model.pieces;
+﻿using ChessGame.model.pieces;
 using System.Text;
 
-namespace Echec.model
+namespace ChessGame.model
 {
     public class Board
     {
-        private Piece[]? pieces;
-        private string whichTurn;
+        private Piece[]? pieces; // tableau contenant le placement des piece dans le plateau
+        private string whichTurn; // a qui est le tour de jouer dans la partie
+        private Piece[]? TempPieces;
 
         public Board()
         {
             whichTurn = "w";
-            initPieces();
+            InitPieces();
         }
-        public string playMove(Coordinates coords)
+
+        /// <summary>
+        /// Deplace les piece si leur mouvement sont valide
+        /// </summary>
+        /// <param name="coords">Coordones du mouvement de la piece</param>
+        /// <returns>un string contenant le placement des piece dans le plateau</returns>
+        public string PlayMove(Coordinates coords)
         {
-            int indexStart = getIndex(coords.XStart / 100, coords.YStart / 100);
-            int indexEnd = getIndex(coords.XDestination / 100, coords.YDestination / 100);
-
+            int indexStart = GetIndex(coords.XStart / 100, coords.YStart / 100);
+            int indexEnd = GetIndex(coords.XDestination / 100, coords.YDestination / 100);
+            TempPieces = new Piece[64];
+            for (int i = 0; i < 64; i++)
+            {
+                TempPieces[i] = pieces[i];
+            }
+            TempPieces.SetValue(pieces[indexStart], indexEnd);
+            TempPieces.SetValue(null, indexStart);
             Piece piece = pieces[indexStart];
-
-            if (piece == null || !checkTurn(piece) || !piece.PlayMove(indexStart, indexEnd))
+            if (piece == null || !CheckTurn(piece) || !piece.PlayMove(indexStart, indexEnd))
             {
                 return null;
             }
@@ -30,60 +42,223 @@ namespace Echec.model
                 return null;
             }
 
-            if(isChecked() == "WIN" || isChecked() == "win")
+            if (isChecked() == "WIN" || isChecked() == "win")
             {
                 return isChecked();
             }
 
-            Console.WriteLine(isChecked());
-
             pieces.SetValue(pieces[indexStart], indexEnd);
             pieces.SetValue(null, indexStart);
-            /*echecWhite();
-            echecBlack();*/
-            changeTurn();
-            return this.ToString();
+            ChangeTurn();
+            return ToString();
         }
 
+        /// <summary>
+        /// Regarde si un des deux jouer est en echec ou en echec et math ou echec et pat
+        /// </summary>
+        /// <returns>Si la partie est terminer et si oui par qui</returns>
         private string isChecked()
         {
-            int possibleMoves;
-            if (whichTurn.Equals("w"))
+            int possibleMoves1;
+            int possibleMoves2;
+            possibleMoves2 = EchecWhite().Count;
+            Console.WriteLine(possibleMoves2);
+            Console.WriteLine(IsInIndirectDangerWhite().Count);
+            if(whichTurn == "w")
             {
-                possibleMoves = echecBlack().Count;
-                // ne marche pas car si ces propre piece le bloc il donne quand meme 0
-                //if (possibleMoves == 0)
-                //{
-                   // return "WIN";
-                //}
-            }
+                if (possibleMoves2 > 0 && IsInDirectDangerWhite())
+                {
+                    if (!IsInDangerWhiteTemp())
+                    {
+                        return null;
+                    }
+  
+                    return "echec";
+                }
+                else if (possibleMoves2 == 0 && IsInDirectDangerWhite() && IsInDirectDangerWhite2().Count == 0)
+                {
 
-            if (whichTurn.Equals("b"))
-            {
-                possibleMoves = echecWhite().Count;
-                // ne marche pas car si ces propre piece le bloc il donne quand meme 0
-                //if (possibleMoves == 0)
-                //{
+                    return "win";
+
+                }
+                else if (possibleMoves2 == 0 && !IsInDirectDangerWhite() && IsInIndirectDangerWhite().Count > 0)
+                {
                     //return "win";
-                //}
+
+                } else if (!IsInDangerWhiteTemp() && possibleMoves2 == 0)
+                {
+                    return null;
+                }
+                return null;
             }
-            return null;
+             return null;
         }
 
-        private List<int> echecWhite()
+        public List<int> IsInDirectDangerWhite2()
         {
-            List<int> dangerZoneBlack = new();
-            List<int> moveRoiWhite = new();
+                List<int> dangerZoneBlack = new();
+                List<int> moveRoiWhite = new();
 
-            // Add all possible ending index
+                for (int i = 0; i < TempPieces.Length - 1; i++)
+                {
+                    Piece checkPieceMove = TempPieces[i];
+                    for (int y = 0; y < TempPieces.Length - 1; y++)
+                    {
+                        if (checkPieceMove != null && (char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
+                        {
+                            if (checkPieceMove.testMoves(i, y))
+                            {
+                                if (checkPieceMove.Type == 'K')
+                                {
+                                    moveRoiWhite.Add(y);
+                                }
+                                else
+                                {
+                                    dangerZoneBlack.Add(y);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (int i = 0; i < dangerZoneBlack.Count; i++)
+                {
+                    for (int j = 0; j < moveRoiWhite.Count; j++)
+                    {
+                        if (moveRoiWhite.ElementAt(j) == dangerZoneBlack.ElementAt(i))
+                        {
+                            moveRoiWhite.RemoveAt(j);
+                        }
+                    }
+                }
+                return moveRoiWhite;
+        }
+
+
+        public List<int> IsInIndirectDangerWhite()
+        {
+            List<int> moveRoiWhite = new();
             for (int i = 0; i < pieces.Length - 1; i++)
             {
                 Piece checkPieceMove = pieces[i];
                 for (int y = 0; y < pieces.Length - 1; y++)
                 {
-                    if (checkPieceMove != null && (Char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
+                    if (checkPieceMove != null && (char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
+                    {
+                        if (checkPieceMove.testMoves(i, y))
+                        {
+                            if (checkPieceMove.Type == 'K')
+                            {
+                                moveRoiWhite.Add(i);
+                            }
+                          
+                        }
+                    }
+                }
+            }
+            return moveRoiWhite;
+        }
+
+        public bool IsInDirectDangerWhite()
+        {
+            List<int> dangerZoneBlack = new();
+            List<int> moveRoiWhite = new();
+
+            for (int i = 0; i < pieces.Length - 1; i++)
+            {
+                Piece checkPieceMove = pieces[i];
+                for (int y = 0; y < pieces.Length - 1; y++)
+                {
+                    if (checkPieceMove != null && (char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
                     {
                         if (checkPieceMove.PlayMove(i, y))
+                        {
+                            if (checkPieceMove.Type == 'K')
+                            {
+                                moveRoiWhite.Add(i);
+                            }
+                            else
+                            {
+                                dangerZoneBlack.Add(y);
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < moveRoiWhite.Count; i++)
+            {
+                for (int j = 0; j < dangerZoneBlack.Count; j++)
+                {
+                    if (moveRoiWhite.ElementAt(i) == dangerZoneBlack.ElementAt(j))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+        public bool IsInDangerWhiteTemp()
+        {
+            List<int> dangerZoneBlack = new();
+            List<int> moveRoiWhite = new();
+
+            for (int i = 0; i < TempPieces.Length - 1; i++)
+            {
+                Piece checkPieceMove = TempPieces[i];
+                for (int y = 0; y < TempPieces.Length - 1; y++)
+                {
+                    if (checkPieceMove != null && (char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
+                    {
+                        if (checkPieceMove.PlayMove2(i, y, TempPieces))
+                        {
+                            if (checkPieceMove.Type == 'K')
+                            {
+                                moveRoiWhite.Add(i);
+                            }
+                            else
+                            {
+                                dangerZoneBlack.Add(y);
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < moveRoiWhite.Count; i++)
+            {
+                for (int j = 0; j < dangerZoneBlack.Count; j++)
+                {
+                    if (moveRoiWhite.ElementAt(i) == dangerZoneBlack.ElementAt(j))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Creer une liste de tout les mouvement possible du roi blanc
+        /// </summary>
+        /// <returns>La liste des mouvement</returns>
+        private List<int> EchecWhite()
+        {
+            List<int> dangerZoneBlack = new();
+            List<int> moveRoiWhite = new();
+
+            for (int i = 0; i < TempPieces.Length - 1; i++)
+            {
+                Piece checkPieceMove = TempPieces[i];
+                for (int y = 0; y < TempPieces.Length - 1; y++)
+                {
+                    if (checkPieceMove != null && (char.IsLower(checkPieceMove.Type) || checkPieceMove.Type == 'K'))
+                    {
+                        if (checkPieceMove.PlayMove2(i, y, TempPieces))
                         {
                             if (checkPieceMove.Type == 'K')
                             {
@@ -108,29 +283,27 @@ namespace Echec.model
                     }
                 }
             }
-            Console.WriteLine("White");
-            for (int i = 0; i < moveRoiWhite.Count; i++)
-            {
-                Console.Write(moveRoiWhite.ElementAt(i) + ", ");
-            }
-            Console.WriteLine("");
+
             return moveRoiWhite;
         }
 
-        private List<int> echecBlack()
+        /// <summary>
+        /// Creer une liste de tout les mouvement possible du roi noire
+        /// </summary>
+        /// <returns>La liste des mouvement</returns>
+        private List<int> EchecBlack()
         {
             List<int> dangerZoneWhite = new();
             List<int> moveRoiBlack = new();
 
-            // Add all possible ending index
-            for (int i = 0; i < pieces.Length - 1; i++)
+            for (int i = 0; i < TempPieces.Length - 1; i++)
             {
-                Piece checkPieceMove = pieces[i];
-                for (int y = 0; y < pieces.Length - 1; y++)
+                Piece checkPieceMove = TempPieces[i];
+                for (int y = 0; y < TempPieces.Length - 1; y++)
                 {
-                    if (checkPieceMove != null && (Char.IsUpper(checkPieceMove.Type) || checkPieceMove.Type == 'k'))
+                    if (checkPieceMove != null && (char.IsUpper(checkPieceMove.Type) || checkPieceMove.Type == 'k'))
                     {
-                        if (checkPieceMove.PlayMove(i, y))
+                        if (checkPieceMove.PlayMove2(i, y, TempPieces))
                         {
                             if (checkPieceMove.Type == 'k')
                             {
@@ -156,20 +329,15 @@ namespace Echec.model
                 }
             }
 
-            Console.WriteLine("Black");
-            for (int i = 0; i < moveRoiBlack.Count; i++)
-            {
-                Console.Write(moveRoiBlack.ElementAt(i) + ", ");
-            }
-            Console.WriteLine("");
             return moveRoiBlack;
         }
 
-
-       
-
-
-        private bool checkTurn(Piece piece)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="piece"></param>
+        /// <returns></returns>
+        private bool CheckTurn(Piece piece)
         {
             switch (whichTurn)
             {
@@ -182,7 +350,10 @@ namespace Echec.model
             }
         }
 
-        private void changeTurn()
+        /// <summary>
+        /// Change a qui est le tour de jouer
+        /// </summary>
+        private void ChangeTurn()
         {
             switch (whichTurn)
             {
@@ -198,23 +369,39 @@ namespace Echec.model
             }
         }
 
-        private int getIndex(int x, int y)
+        /// <summary>
+        /// Calcule l'index d'une piece dans un tableau, a l'aide de ces cordonée sur le plateau
+        /// </summary>
+        /// <param name="x">Coordonnes X de la piece</param>
+        /// <param name="y">Coordonnes Y de la piece</param>
+        /// <returns> l'index d'une piece dans un tableau</returns>
+        private int GetIndex(int x, int y)
         {
             return y * 8 + x;
         }
 
+        /// <summary>
+        /// Regarde si il y a une piece a l'index donner
+        /// </summary>
+        /// <param name="x">Coordonnes X de la piece</param>
+        /// <param name="y">Coordonnes Y de la piece</param>
+        /// <returns>si il y a une piece a l'index donner</returns>
         public bool IsPieceAtPosition(int x, int y)
         {
-            if (pieces[getIndex(x, y)] == null)
+            if (pieces[GetIndex(x, y)] == null)
             {
                 return false;
             }
             return true;
         }
 
-        private void initPieces()
+        /// <summary>
+        /// Initialise les piece dans leur emplacement de base dans le tableau de piece de la partie
+        /// </summary>
+        private void InitPieces()
         {
             string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+          
 
             pieces = new Piece[64];
             string[] fields = fen.Split(' ');
@@ -225,9 +412,9 @@ namespace Echec.model
             {
                 foreach (char c in rank)
                 {
-                    if (Char.IsDigit(c))
+                    if (char.IsDigit(c))
                     {
-                        index += (int)Char.GetNumericValue(c);
+                        index += (int)char.GetNumericValue(c);
                     }
                     else
                     {
@@ -275,6 +462,12 @@ namespace Echec.model
                 }
             }
         }
+
+        /// <summary>
+        /// Prend le tableau de piece et le transforme en string formater avec FREN
+        /// </summary>
+        /// <returns>un string formater avec FREN</returns>
+        /// <exception cref="ArgumentException">Permet de faire un string avec un tableau contenant des index vide</exception>
         public override string ToString()
         {
             if (pieces.Length != 64)

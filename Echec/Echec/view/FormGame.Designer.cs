@@ -1,4 +1,4 @@
-﻿namespace Echec.view
+﻿namespace ChessGame.view
 {
     partial class FormGame
     {
@@ -45,7 +45,6 @@
             chessboard.Size = new Size(800, 800);
             chessboard.TabIndex = 0;
             chessboard.TabStop = false;
-            chessboard.Click += chessboard_Click;
             chessboard.MouseDown += chessboard_MouseDown;
             // 
             // labWhichTurn
@@ -97,7 +96,6 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "FormGame";
             Text = "Game";
-            Load += FormGame_Load;
             ((System.ComponentModel.ISupportInitialize)chessboard).EndInit();
             ResumeLayout(false);
             PerformLayout();

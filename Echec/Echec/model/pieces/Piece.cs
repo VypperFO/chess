@@ -1,20 +1,29 @@
-﻿namespace Echec.model.pieces
+﻿namespace ChessGame.model.pieces
 {
     public class Piece
     {
-        public char Type { get; set; }
-        public Piece[] Pieces { get; set; }
+        public char Type { get; set; } // Couleur de la piece
+        public Piece[] Pieces { get; set; } // quelle est la piece
 
         public Piece() { }
 
         public Piece(char type, Piece[] pieces)
         {
-            Type = type;
+            Type = type; 
             Pieces = pieces;
         }
 
         public virtual bool PlayMove(int startIndex, int endIndex) { return false; }
 
+        public virtual bool PlayMove2(int startIndex, int endIndex, Piece[] TempPieces) { return false; }
+
+        public virtual bool testMoves(int startIndex, int endIndex) { return false; }
+
+        /// <summary>
+        /// Verifie si la destination d'une piece conient une piece de la meme couleur que la piece qui fait le mouvement
+        /// </summary>
+        /// <param name="endIndex">la destination de la piece</param>
+        /// <returns>si la destination d'une piece conient une piece de la meme couleur</returns>
         public bool SameColor(int endIndex)
         {
             if (Pieces[endIndex] == null)
@@ -23,18 +32,40 @@
             }
 
             // White
-            if(Char.IsUpper(Type) && Char.IsUpper(Pieces[endIndex].Type))
+            if (char.IsUpper(Type) && char.IsUpper(Pieces[endIndex].Type))
             {
                 return true;
             }
 
             // Black
-            if (Char.IsLower(Type) && Char.IsLower(Pieces[endIndex].Type))
+            if (char.IsLower(Type) && char.IsLower(Pieces[endIndex].Type))
             {
                 return true;
             }
 
             return false;
-        }   
+        }
+
+        public bool SameColor2(int endIndex, Piece[] TempPieces)
+        {
+            if (TempPieces[endIndex] == null)
+            {
+                return false;
+            }
+
+            // White
+            if (char.IsUpper(Type) && char.IsUpper(TempPieces[endIndex].Type))
+            {
+                return true;
+            }
+
+            // Black
+            if (char.IsLower(Type) && char.IsLower(TempPieces[endIndex].Type))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Echec.model;
+﻿using ChessGame.model;
 
-namespace Echec.view
+namespace ChessGame.view
 {
     partial class FormMenu
     {
@@ -30,189 +30,205 @@ namespace Echec.view
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnNewGame = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
-            this.SuspendLayout();
+            btnNewGame = new Button();
+            button1 = new Button();
+            listBox1 = new ListBox();
+            groupBox1 = new GroupBox();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            button2 = new Button();
+            button3 = new Button();
+            textBox1 = new TextBox();
+            label6 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            groupBox1.SuspendLayout();
+            SuspendLayout();
             // 
             // btnNewGame
             // 
-            this.btnNewGame.Location = new System.Drawing.Point(73, 527);
-            this.btnNewGame.Name = "btnNewGame";
-            this.btnNewGame.Size = new System.Drawing.Size(330, 34);
-            this.btnNewGame.TabIndex = 0;
-            this.btnNewGame.Text = "Commencer";
-            this.btnNewGame.UseVisualStyleBackColor = true;
-            this.btnNewGame.Click += new System.EventHandler(this.btnNewGame_Click);
+            btnNewGame.Location = new Point(51, 316);
+            btnNewGame.Margin = new Padding(2, 2, 2, 2);
+            btnNewGame.Name = "btnNewGame";
+            btnNewGame.Size = new Size(231, 23);
+            btnNewGame.TabIndex = 0;
+            btnNewGame.Text = "Commencer";
+            btnNewGame.UseVisualStyleBackColor = true;
+            btnNewGame.Click += btnNewGame_Click;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(80, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(323, 34);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Ajouter joueur";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Location = new Point(56, 30);
+            button1.Margin = new Padding(2, 2, 2, 2);
+            button1.Name = "button1";
+            button1.Size = new Size(226, 30);
+            button1.TabIndex = 1;
+            button1.Text = "Ajouter joueur";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // listBox1
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 25;
-            this.listBox1.Location = new System.Drawing.Point(23, 107);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(232, 179);
-            this.listBox1.TabIndex = 2;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(16, 64);
+            listBox1.Margin = new Padding(2, 2, 2, 2);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(164, 109);
+            listBox1.TabIndex = 2;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(276, 107);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(211, 179);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Statistiques :";
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Location = new Point(193, 64);
+            groupBox1.Margin = new Padding(2, 2, 2, 2);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(2, 2, 2, 2);
+            groupBox1.Size = new Size(148, 107);
+            groupBox1.TabIndex = 3;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Statistiques :";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 110);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 25);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Défaites :";
+            label3.AutoSize = true;
+            label3.Location = new Point(4, 66);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(55, 15);
+            label3.TabIndex = 2;
+            label3.Text = "Défaites :";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 25);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Victoires :";
+            label2.AutoSize = true;
+            label2.Location = new Point(4, 44);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(58, 15);
+            label2.TabIndex = 1;
+            label2.Text = "Victoires :";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Null :";
+            label1.AutoSize = true;
+            label1.Location = new Point(4, 20);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(35, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Null :";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 388);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(88, 25);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Joueur 1 :";
+            label4.AutoSize = true;
+            label4.Location = new Point(16, 233);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(57, 15);
+            label4.TabIndex = 4;
+            label4.Text = "Joueur 1 :";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 427);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 25);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Joueur 2 :";
+            label5.AutoSize = true;
+            label5.Location = new Point(16, 256);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(57, 15);
+            label5.TabIndex = 5;
+            label5.Text = "Joueur 2 :";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 292);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 34);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Ajouter";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Location = new Point(8, 175);
+            button2.Margin = new Padding(2, 2, 2, 2);
+            button2.Name = "button2";
+            button2.Size = new Size(88, 26);
+            button2.TabIndex = 6;
+            button2.Text = "Ajouter";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(143, 292);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(125, 34);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Enlever";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            button3.Location = new Point(100, 175);
+            button3.Margin = new Padding(2, 2, 2, 2);
+            button3.Name = "button3";
+            button3.Size = new Size(88, 26);
+            button3.TabIndex = 7;
+            button3.Text = "Enlever";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(80, 15);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(323, 31);
-            this.textBox1.TabIndex = 8;
+            textBox1.Location = new Point(56, 9);
+            textBox1.Margin = new Padding(2, 2, 2, 2);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(227, 23);
+            textBox1.TabIndex = 8;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 18);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 25);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Nom :";
+            label6.AutoSize = true;
+            label6.Location = new Point(9, 11);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(40, 15);
+            label6.TabIndex = 9;
+            label6.Text = "Nom :";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(116, 389);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 25);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "label7";
+            label7.AutoSize = true;
+            label7.Location = new Point(81, 233);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(38, 15);
+            label7.TabIndex = 10;
+            label7.Text = "label7";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(116, 427);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 25);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "label8";
+            label8.AutoSize = true;
+            label8.Location = new Point(81, 256);
+            label8.Margin = new Padding(2, 0, 2, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(38, 15);
+            label8.TabIndex = 11;
+            label8.Text = "label8";
             // 
             // FormMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 602);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnNewGame);
-            this.Name = "FormMenu";
-            this.Text = "Form1";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(349, 361);
+            Controls.Add(label8);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(textBox1);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(groupBox1);
+            Controls.Add(listBox1);
+            Controls.Add(button1);
+            Controls.Add(btnNewGame);
+            Margin = new Padding(2, 2, 2, 2);
+            Name = "FormMenu";
+            Text = "Form1";
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

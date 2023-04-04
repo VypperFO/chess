@@ -1,17 +1,13 @@
-using Echec.model;
-using Echec.model.pieces;
-using Echec.view;
-using Microsoft.VisualBasic;
-using System;
-using System.Windows.Forms.VisualStyles;
+using ChessGame.view;
+using ChessGame.model;
 
-namespace Echec
+namespace ChessGame
 {
     public class Chess
     {
-       
-        private List<Player> listAllPlayer = new();
-        private List<Game> listGame = new();
+
+        private List<Player> listAllPlayer = new(); // liste de tout les joueur possible de selectionner
+        private List<Game> listGame = new(); // liste de tout les partie 
 
         static void Main()
         {
@@ -37,31 +33,39 @@ namespace Echec
         {
             Coordinates coords = new Coordinates(xStart, yStart, xEnd, yEnd);
             Game game = listGame.ElementAt(form.Id);
-            string turnPlayed = game.PlayMove(coords);
-            if (turnPlayed == "null")
+            string turnPlayed;
+            if (game.PlayMove(coords) != null)
             {
-               Player Player1 = game.ListPlayers.ElementAt(0);
-               Player Player2 = game.ListPlayers.ElementAt(1);
-                setNull(Player1.Name);
-                setNull(Player2.Name);
-                form.gameNull();
-            } else if(turnPlayed == "win")
-            {
-                Player Player1 = game.ListPlayers.ElementAt(0);
-                Player Player2 = game.ListPlayers.ElementAt(1);
-                setLoose(Player1.Name);
-                setWin(Player2.Name);
-                form.gameWon(Player2.Name);
-            } else if(turnPlayed == "WIN")
-            {
-                Player Player1 = game.ListPlayers.ElementAt(0);
-                Player Player2 = game.ListPlayers.ElementAt(1);
-                setWin(Player1.Name);
-                setLoose(Player2.Name);
-                form.gameWon(Player1.Name);
-            } else
-            {
-                form.ParseFen(turnPlayed);
+                turnPlayed = game.PlayMove(coords);
+
+                if (turnPlayed == "null")
+                {
+                    Player Player1 = game.ListPlayers.ElementAt(0);
+                    Player Player2 = game.ListPlayers.ElementAt(1);
+                    setNull(Player1.Name);
+                    setNull(Player2.Name);
+                    form.gameNull();
+                }
+                else if (turnPlayed == "win")
+                {
+                    Player Player1 = game.ListPlayers.ElementAt(0);
+                    Player Player2 = game.ListPlayers.ElementAt(1);
+                    setLoose(Player1.Name);
+                    setWin(Player2.Name);
+                    form.gameWon(Player2.Name);
+                }
+                else if (turnPlayed == "WIN")
+                {
+                    Player Player1 = game.ListPlayers.ElementAt(0);
+                    Player Player2 = game.ListPlayers.ElementAt(1);
+                    setWin(Player1.Name);
+                    setLoose(Player2.Name);
+                    form.gameWon(Player1.Name);
+                }
+                else
+                {
+                    form.ParseFen(turnPlayed);
+                }
             }
 
         }
@@ -83,6 +87,11 @@ namespace Echec
             myForm.ParseFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
             myForm.Show();
         }
+
+        /// <summary>
+        /// Lit les stats des stats qui sont dans le fichier texte
+        /// </summary>
+        /// <returns>une liste de tout les joueurs avec leur stats</returns>
         public List<string> ReadStats()
         {
             listAllPlayer.Clear();
@@ -113,6 +122,10 @@ namespace Echec
             return playerNames;
         }
 
+        /// <summary>
+        /// Creer un nouveau joueur dans le fichier
+        /// </summary>
+        /// <param name="name">nom du joueur</param>
         public void NewPlayer(string name)
         {
             if (!IsUserExisting(name))
@@ -129,6 +142,11 @@ namespace Echec
             }
         }
 
+        /// <summary>
+        /// Obtient les stats d'un joueur a un certain index
+        /// </summary>
+        /// <param name="index">index ou ce trouve le joueur dans le fichier</param>
+        /// <returns>une liste contenant les stats du joueur</returns>
         public List<string> GetStats(int index)
         {
             List<string> strings = new List<string>();
@@ -139,6 +157,11 @@ namespace Echec
             return strings;
         }
 
+        /// <summary>
+        /// Determine si un joueur avec le meme nom existe deja ou non
+        /// </summary>
+        /// <param name="name">nom du joueur rechercher</param>
+        /// <returns>si il existe deja dans le fichier</returns>
         public bool IsUserExisting(string name)
         {
             string path = "statistique.txt";
@@ -154,6 +177,11 @@ namespace Echec
             return false;
         }
 
+        /// <summary>
+        /// Obtient un joueur a l'aide de son nom
+        /// </summary>
+        /// <param name="name">nom du joueur</param>
+        /// <returns>le joueur </returns>
         public Player GetPlayer(string name)
         {
 
@@ -166,47 +194,37 @@ namespace Echec
             }
             return null;
         }
-        
+
+        /// <summary>
+        /// Initialise les 2 joueur comme les joueurs de la partie
+        /// </summary>
+        /// <param name="playerOne">Joueur 1</param>
+        /// <param name="playerTwo">Joueur 2</param>
         public void sendPlayers(string playerOne, string playerTwo)
         {
             Player player1 = GetPlayer(playerOne);
             Player player2 = GetPlayer(playerTwo);
             Game game = listGame.ElementAt(listGame.Count - 1);
-            game.addPlayerToGame(player1,player2);
+            game.addPlayerToGame(player1, player2);
         }
 
+        /// <summary>
+        /// Rajouter une null au statistique d'un joueur
+        /// </summary>
+        /// <param name="name">nom du joueur</param>
         public void setNull(string name)
         {
             string path = "statistique.txt";
             int index = 0;
-            var lines = System.IO.File.ReadAllLines("statistique.txt");
-            for(int i = 0; i < lines.Length; i++)
-            {
-                if (lines[i] == name)
-                {
-                   index = i+3;
-                }
-            }
-            String[] arrLine = File.ReadAllLines(path);     
-            string var = arrLine[index];
-            int var2 = int.Parse(var);
-            var2 = var2 + 1;
-            arrLine[index] =var2.ToString();
-            File.WriteAllLines(path, arrLine);
-        }
-        public void setWin(string name)
-        {
-            string path = "statistique.txt";
-            int index = 0;
-            var lines = System.IO.File.ReadAllLines("statistique.txt");
+            var lines = File.ReadAllLines("statistique.txt");
             for (int i = 0; i < lines.Length; i++)
             {
                 if (lines[i] == name)
                 {
-                    index = i + 1;
+                    index = i + 3;
                 }
             }
-            String[] arrLine = File.ReadAllLines(path);
+            string[] arrLine = File.ReadAllLines(path);
             string var = arrLine[index];
             int var2 = int.Parse(var);
             var2 = var2 + 1;
@@ -214,11 +232,39 @@ namespace Echec
             File.WriteAllLines(path, arrLine);
         }
 
+        /// <summary>
+        /// Rajouter une partie gagner au statistique d'un joueur
+        /// </summary>
+        /// <param name="name">nom du joueur</param>
+        public void setWin(string name)
+        {
+            string path = "statistique.txt";
+            int index = 0;
+            var lines = File.ReadAllLines("statistique.txt");
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i] == name)
+                {
+                    index = i + 1;
+                }
+            }
+            string[] arrLine = File.ReadAllLines(path);
+            string var = arrLine[index];
+            int var2 = int.Parse(var);
+            var2 = var2 + 1;
+            arrLine[index] = var2.ToString();
+            File.WriteAllLines(path, arrLine);
+        }
+
+        /// <summary>
+        /// Rajouter une partie perdu au statistique d'un joueur
+        /// </summary>
+        /// <param name="name">nom du joueur</param>
         public void setLoose(string name)
         {
             string path = "statistique.txt";
             int index = 0;
-            var lines = System.IO.File.ReadAllLines("statistique.txt");
+            var lines = File.ReadAllLines("statistique.txt");
             for (int i = 0; i < lines.Length; i++)
             {
                 if (lines[i] == name)
@@ -226,7 +272,7 @@ namespace Echec
                     index = i + 2;
                 }
             }
-            String[] arrLine = File.ReadAllLines(path);
+            string[] arrLine = File.ReadAllLines(path);
             string var = arrLine[index];
             int var2 = int.Parse(var);
             var2 = var2 + 1;

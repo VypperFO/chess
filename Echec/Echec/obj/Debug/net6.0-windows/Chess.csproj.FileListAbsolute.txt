@@ -1,0 +1,11 @@
+D:\ONE DRIVEW\OneDrive - Cegep de Lanaudiere\Bureau\chessFinal\Echec\Echec\obj\Debug\net6.0-windows\Chess.csproj.AssemblyReference.cache
+D:\ONE DRIVEW\OneDrive - Cegep de Lanaudiere\Bureau\chessFinal\Echec\Echec\obj\Debug\net6.0-windows\Chess.csproj.SuggestedBindingRedirects.cache
+D:\ONE DRIVEW\OneDrive - Cegep de Lanaudiere\Bureau\chessFinal\Echec\Echec\obj\Debug\net6.0-windows\Chess.dll.config
+D:\ONE DRIVEW\OneDrive - Cegep de Lanaudiere\Bureau\chessFinal\Echec\Echec\obj\Debug\net6.0-windows\Chess.Properties.Resources.resources
+D:\ONE DRIVEW\OneDrive - Cegep de Lanaudiere\Bureau\chessFinal\Echec\Echec\obj\Debug\net6.0-windows\Echec.view.FormGame.resources
+D:\ONE DRIVEW\OneDrive - Cegep de Lanaudiere\Bureau\chessFinal\Echec\Echec\obj\Debug\net6.0-windows\Echec.view.FormMenu.resources
+D:\ONE DRIVEW\OneDrive - Cegep de Lanaudiere\Bureau\chessFinal\Echec\Echec\obj\Debug\net6.0-windows\Chess.csproj.GenerateResource.cache
+D:\ONE DRIVEW\OneDrive - Cegep de Lanaudiere\Bureau\chessFinal\Echec\Echec\obj\Debug\net6.0-windows\Chess.GeneratedMSBuildEditorConfig.editorconfig
+D:\ONE DRIVEW\OneDrive - Cegep de Lanaudiere\Bureau\chessFinal\Echec\Echec\obj\Debug\net6.0-windows\Chess.AssemblyInfoInputs.cache
+D:\ONE DRIVEW\OneDrive - Cegep de Lanaudiere\Bureau\chessFinal\Echec\Echec\obj\Debug\net6.0-windows\Chess.AssemblyInfo.cs
+D:\ONE DRIVEW\OneDrive - Cegep de Lanaudiere\Bureau\chessFinal\Echec\Echec\obj\Debug\net6.0-windows\Chess.csproj.CoreCompileInputs.cache
